@@ -1,0 +1,21 @@
+.header-div{
+    background-color: orange;
+    height: 130px;
+}
+
+.back-button-div{
+    display: inline-block;
+    vertical-align: middle;
+}
+.title-div{
+    display: inline-block;
+    height: 120px;
+    width: 500px;
+    vertical-align: middle;
+    border: solid;
+}
+.title{
+    font-size: 50px;
+    color: white;
+    vertical-align: middle;
+}
