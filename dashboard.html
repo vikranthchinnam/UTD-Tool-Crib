@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="dashboard">Dashboard</h1>
+        <div class="header-bttns">
+            <button class="header-buttns">Check-in/Check-out</button>
+            <button class="header-buttns">Admin Panel</button>
+            <button class="header-buttns" id="log-out">Log out</button>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="table-head">
+                <th>Team Number</th>
+                <th>Table Number</th>
+                <th>Team Member</th>
+                <th>Due Date</th>
+                <th>Tool Limit</th>
+                <th>Tool Name</th>
+                <th>Notes</th>
+            </tr>
+            <tbody>
+                <td>1601</td>
+                <td>127</td>
+                <td>Leeroy Jenkins</td>
+                <td>2/20/2023 @ 9:00pm</td>
+                <td>3</td>
+                <td>Hammer</td>
+                <td>Spring 2024</td>
+            </tbody>
+            <tbody id="past-due">
+                <td id="past-due">1601</td>
+                <td id="past-due">127</td>
+                <td id="past-due">Leeroy Jenkins</td>
+                <td id="past-due">PAST DUE</td>
+                <td id="past-due">3</td>
+                <td id="past-due">Hammer</td>
+                <td id="past-due">Spring 2024</td>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
