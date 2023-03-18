@@ -4,14 +4,16 @@ import Dashboard from "./components/Dashboard";
 import ManageTeams from "./components/ManageTeams";
 import ManageTools from "./components/ManageTools";
 import ReturnTool from "./components/ReturnTool";
+import { TeamData } from "./data";
 
 function App() {
+  
   return (
     <Router>
       <div className="App">
         
         <Routes>
-          <Route path="/" element={<Dashboard />}/>
+          <Route path="/" element={<Dashboard {...TeamData}/>}/>
           <Route path="/Borrow-Tool" element={<BorrowTool />}/>
           <Route path="/Return-Tool" element={<ReturnTool />}/>
           <Route path="/Manage-Teams" element={<ManageTeams />}/>
