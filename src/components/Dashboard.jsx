@@ -56,7 +56,7 @@ function Dashboard() {
                 <div className="cell">{item['team-number']}</div>
                 <div className="cell">{item['table-number']}</div>
                 <div className="cell">{item['team-member']}</div>
-                <div className="cell">{item['due-date']}</div>
+                <div className="cell">{new Date(item['due-date'])}</div>
                 <div className="cell">{item['tool-name']}</div>
                 <div className="cell">{item['notes']}</div>
                 <div className="cell">{item['tool-limit']}</div>
