@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+PROJECT DESCRIPTION
+The UTDesign Fabrication Shop is looking for an automated software solution to track inventory based on input through a web application code from the team. The current inventory management requires paper logs that are later entered manually into an Excel spreadsheet. Therefore, project Tool Crib is essential to ensure UTDesign’s tool checkout integrity and make the tool checkout logging easier and more accountable. Fabrication Shop workers will use the finished product to check out the tools for a user.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The long-term goal of this project is to create a digitalized inventory checkout that can be used to prevent teams from hoarding tools and encourage students to attend training in order to gain more tokens. By the end of this semester, we aim to complete this project by developing our knowledge of ReactJS, JavaScript, CSS/HTML, and SQL. Initially, the project was supposed to include a barcode system that can be scanned through the UTDesign barcode scanner, however, after discussing with the project partner, we decided it would be more effective to do an online web app that didn’t rely on a barcode due to the issue that barcodes will fade through wear and tear.
+
+PARTNER INFORMATION
+Gene Woten is the Studio Manager of UTDesign, and Timothy Givens is the Studio Assistant Manager. They both work for UTDesign and realized the issue of their current inventory situation. As of right now, it is paper-based and unorganized which leaves teams unaccountable about the tools they may be hoarding. Additionally, they realized a lack of attendance in their training sessions. Combining these factors, their mission is to create a digitalized system to track teams who checkout inventory as well as create a token system that encourages attendance to their training.
 
