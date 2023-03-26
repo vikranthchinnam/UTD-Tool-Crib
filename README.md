@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/77121609/227809737-6f06dc29-79d6-4df5-be49-6877af93d286.png)
+
+
 The UTDesign Fabrication Shop is looking for an automated software solution to track inventory based on input through a web application code from the team. The current inventory management requires paper logs that are later entered manually into an Excel spreadsheet. Therefore, project Tool Crib is essential to ensure UTDesign’s tool checkout integrity and make the tool checkout logging easier and more accountable. Fabrication Shop workers will use the finished product to check out the tools for a user.
 
 The long-term goal of this project is to create a digitalized inventory checkout that can be used to prevent teams from hoarding tools and encourage students to attend training in order to gain more tokens. By the end of this semester, we aim to complete this project by developing our knowledge of ReactJS, JavaScript, CSS/HTML, and SQL. Initially, the project was supposed to include a barcode system that can be scanned through the UTDesign barcode scanner, however, after discussing with the project partner, we decided it would be more effective to do an online web app that didn’t rely on a barcode due to the issue that barcodes will fade through wear and tear.
