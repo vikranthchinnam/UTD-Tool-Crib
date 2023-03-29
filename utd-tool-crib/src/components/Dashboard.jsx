@@ -40,7 +40,7 @@ function Dashboard() {
           <button>Log Out</button>
         </div>
       </div>
-      <div className="row-grid">
+      <div className="grid">
         <div className="column-grid">
             <div className="cell">Team Number</div>
             <div className="cell">Table Number</div>
