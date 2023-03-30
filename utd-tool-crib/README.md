@@ -1,3 +1,13 @@
+# How to start this app
+
+first open 2 terminal and run this command 'json-server --watch db.json --port 8000'
+
+if that doesn't work then try 'npm install -g json-server' and run this command 'json-server --watch db.json --port 8000'
+
+if the install returns error then do 'sudo npm install -g json-server' and run this command 'json-server --watch db.json --port 8000'
+
+Then in the second terminal run npm start, to start seeing the progress.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
