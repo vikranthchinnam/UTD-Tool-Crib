@@ -8,6 +8,7 @@
 }
 
 .input-box {
+    max-width: fit-content;
     background-color: rgba(21, 71, 52, 25%);
     color:black;
     display: flex;
@@ -29,4 +30,9 @@
 
 #due-date {
     margin-right: 10px;
+}
+
+.submit{
+    margin-bottom: 30px;
+    max-width: fit-content;
 }
