@@ -26,7 +26,24 @@ function ManageTeams(){
     }, []);
 
     const addUserEvent = (event) => {
+        console.log(teammembers);
+        const teamdata = {teamnumber,teammembers,token};
+        if(addUser){
+            fetch("http://localhost:8000/teams",{
+                method: "POST",
+                headers: {"content-type":"application/json"},
+                body:JSON.stringify(teamdata)
+            }).then((res) =>{
+                window.location.reload();
+            }).catch((err) => {
+                console.log(err.message);
+            })
+        }
         setAdd(!addUser);
+        
+        
+        
+        
     }
 
     const addInputEvent = (event) =>{
@@ -40,11 +57,13 @@ function ManageTeams(){
                     <p>Team Number:</p>
                     <input type="text" name="" id="" />
                     <p>Team Members</p>
-                    {Array.apply(null, Array(counter)).map((c) => 
+                    {Array.apply(null, Array(counter)).map((c, i) => 
                         <div>
                             <input type="text" />
                         </div>
                     )}
+                    <p>Token</p>
+                    <input type="text" value={5}/>
                     <button onClick={addInputEvent}>new member</button>
                     <button onClick={addUserEvent}>submit</button>
                 </div>
@@ -64,7 +83,9 @@ function ManageTeams(){
     async function getOrderData() {
         fetch("http://localhost:8000/teams").then((res) => {
             return res.json();
+            
         }).then((resp => {setData(resp);})).catch((err) => {
+            
             console.log(err.message);
         })
     }
@@ -97,7 +118,7 @@ function ManageTeams(){
                 {data && data.map((item) => 
                     <div className="column-grid-2">
                         <div className="cell-2">{item['team-number']}</div>
-                        <div className="single-row">{item['team-members'].map((thing) => <div><p>{thing + ", "}</p></div>)}</div>
+                        <div className="single-row">{item['team-members'] && item['team-members'].length > 0 && item['team-members'].map((item_) => <span><p>{item_ + ", "}</p></span>)}</div>
                         <div className="cell-2">{item['tokens']}</div>
                     
                         

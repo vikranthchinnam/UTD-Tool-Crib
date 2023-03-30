@@ -63,39 +63,75 @@
   ],
   "teams": [
     {
-      "id":1,
+      "id": 1,
       "team-number": 1,
-      "team-members": ["James Garfield","Winnie Garfield","Jinnie Garfield","Minnie Garfield","Kai Garfield"],
+      "team-members": [
+        "James Garfield",
+        "Winnie Garfield",
+        "Jinnie Garfield",
+        "Minnie Garfield",
+        "Kai Garfield"
+      ],
       "tokens": 1
     },
     {
-      "id":2,
+      "id": 2,
       "team-number": 2,
-      "team-members": ["Timothy Givens","Winnie Givens","Jinnie Givens","Minnie Givens","Kai Givens"],
+      "team-members": [
+        "Timothy Givens",
+        "Winnie Givens",
+        "Jinnie Givens",
+        "Minnie Givens",
+        "Kai Givens"
+      ],
       "tokens": 1
     },
     {
-      "id":3,
+      "id": 3,
       "team-number": 3,
-      "team-members": ["Alecs Max Steele","Becs Steele","Cecs Steele","Decs Steele","Fecs Steele"],
+      "team-members": [
+        "Alecs Max Steele",
+        "Becs Steele",
+        "Cecs Steele",
+        "Decs Steele",
+        "Fecs Steele"
+      ],
       "tokens": 1
     },
     {
-      "id":4,
+      "id": 4,
       "team-number": 4,
-      "team-members": ["Alexandra Botez","Balexandra Botez","Calexandra Botez","Dalexandra Botez","Falexandra Botez"],
+      "team-members": [
+        "Alexandra Botez",
+        "Balexandra Botez",
+        "Calexandra Botez",
+        "Dalexandra Botez",
+        "Falexandra Botez"
+      ],
       "tokens": 1
     },
     {
-      "id":5,
+      "id": 5,
       "team-number": 5,
-      "team-members": ["Keo Morillo","Beo Morillo","Ceo Morillo","Deo Morillo","Feo Morillo"],
+      "team-members": [
+        "Keo Morillo",
+        "Beo Morillo",
+        "Ceo Morillo",
+        "Deo Morillo",
+        "Feo Morillo"
+      ],
       "tokens": 1
     },
     {
-      "id":6,
+      "id": 6,
       "team-number": 6,
-      "team-members": ["Daniel Hori Davilla","Baniel Hori Davilla","Caniel Hori Davilla","Laniel Hori Davilla","Maniel Hori Davilla"],
+      "team-members": [
+        "Daniel Hori Davilla",
+        "Baniel Hori Davilla",
+        "Caniel Hori Davilla",
+        "Laniel Hori Davilla",
+        "Maniel Hori Davilla"
+      ],
       "tokens": 1
     }
   ],
