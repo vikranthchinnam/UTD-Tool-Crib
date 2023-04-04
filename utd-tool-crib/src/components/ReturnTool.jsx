@@ -21,7 +21,7 @@ function ReturnTool(){
 
     const handleEnterData = (event) =>{
         // setNumber(event.target.value);
-        const filteredData = data.filter(entry => entry['team-number'] == event.target.value);
+        const filteredData = data.filter(entry => entry['team-number'] === event.target.value);
         if (filteredData.length > 0) {
             const toolNames = filteredData.map(entry => entry['tool-name']);
             setTool(toolNames);
