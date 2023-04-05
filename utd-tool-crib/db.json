@@ -2,7 +2,7 @@
   "logs": [
     {
       "id": 1,
-      "team-number": 1,
+      "team_number": 1,
       "table-number": 5,
       "team-member": "James Garfield",
       "due-date": "2023-02-23T20:40",
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "team-number": 2,
+      "team_number": 2,
       "table-number": 5,
       "team-member": "Timothy Givens",
       "due-date": "2023-02-23T20:40",
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "team-number": 3,
+      "team_number": 3,
       "table-number": 5,
       "team-member": "Alecs Max Steele",
       "due-date": "2023-02-23T20:40",
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "team-number": 4,
+      "team_number": 4,
       "table-number": 5,
       "team-member": "Alexandra Botez",
       "due-date": "2023-02-23T20:40",
@@ -42,7 +42,7 @@
     },
     {
       "id": 5,
-      "team-number": 5,
+      "team_number": 5,
       "table-number": 5,
       "team-member": "Keo Morillo",
       "due-date": "2023-02-23T20:40",
@@ -52,7 +52,7 @@
     },
     {
       "id": 6,
-      "team-number": 1,
+      "team_number": 1,
       "table-number": 5,
       "team-member": "Daniyal Hori Davilla",
       "due-date": "2023-02-23T20:40",
@@ -64,8 +64,8 @@
   "teams": [
     {
       "id": 1,
-      "team-number": 1,
-      "team-members": [
+      "teamNumber": 1,
+      "teamMembers": [
         "James Garfield",
         "Winnie Garfield",
         "Jinnie Garfield",
@@ -76,8 +76,8 @@
     },
     {
       "id": 2,
-      "team-number": 2,
-      "team-members": [
+      "teamNumber": 2,
+      "teamMembers": [
         "Timothy Givens",
         "Winnie Givens",
         "Jinnie Givens",
@@ -88,8 +88,8 @@
     },
     {
       "id": 3,
-      "team-number": 3,
-      "team-members": [
+      "teamNumber": 3,
+      "teamMembers": [
         "Alecs Max Steele",
         "Becs Steele",
         "Cecs Steele",
@@ -100,8 +100,8 @@
     },
     {
       "id": 4,
-      "team-number": 4,
-      "team-members": [
+      "teamNumber": 4,
+      "teamMembers": [
         "Alexandra Botez",
         "Balexandra Botez",
         "Calexandra Botez",
@@ -112,8 +112,8 @@
     },
     {
       "id": 5,
-      "team-number": 5,
-      "team-members": [
+      "teamNumber": 5,
+      "teamMembers": [
         "Keo Morillo",
         "Beo Morillo",
         "Ceo Morillo",
@@ -124,8 +124,8 @@
     },
     {
       "id": 6,
-      "team-number": 6,
-      "team-members": [
+      "teamNumber": 6,
+      "teamMembers": [
         "Daniel Hori Davilla",
         "Baniel Hori Davilla",
         "Caniel Hori Davilla",
