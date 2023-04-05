@@ -137,7 +137,28 @@
   ],
   "tools": [
     {
-      "tool": "typicode"
+      "id": 1,
+      "tool": "Wrench"
+    },
+    {
+      "id": 2,
+      "tool": "Hammer"
+    },
+    {
+      "id": 3,
+      "tool": "Hot glue gun"
+    },
+    {
+      "id": 5,
+      "tool": "Alligator clamps"
+    },
+    {
+      "id": 6,
+      "tool": "Microdriver"
+    },
+    {
+      "id": 7,
+      "tool": "Files"
     }
   ]
 }

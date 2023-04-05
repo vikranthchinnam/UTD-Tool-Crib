@@ -17,6 +17,25 @@ function ManageTeams() {
 
   //   const [tokens, setToken] = useState(0);
 
+  const removeUserEvent = (item) => {
+    if (
+      window.confirm(
+        "Do you want to remove team number " + item.teamNumber + "?"
+      )
+    ) {
+      fetch("http://localhost:8000/teams/" + item.id, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          alert("Removed successfully.");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+
   const editUserEvent = (id) => {
     console.log(id);
     const idDiv = document.getElementById(id + "div");
@@ -24,7 +43,7 @@ function ManageTeams() {
 
   useEffect(() => {
     async function fetchData() {
-      const _data = await getOrderData();
+      const _data = await getTeamData();
     }
 
     fetchData();
@@ -111,7 +130,6 @@ function ManageTeams() {
           <div className="cell-2" id={item.id + "number"}>
             {item["teamNumber"]}
           </div>
-
           <div className="single-row">
             {item["teamMembers"] &&
               item["teamMembers"].length > 0 &&
@@ -121,7 +139,6 @@ function ManageTeams() {
                 </span>
               ))}
           </div>
-
           <div className="cell-2">{item["tokens"]}</div>
           <div className="cell-2">
             <button
@@ -131,14 +148,20 @@ function ManageTeams() {
             >
               Edit
             </button>
-            <button>Remove</button>
+            <button
+              onClick={() => {
+                removeUserEvent(item);
+              }}
+            >
+              Remove
+            </button>
           </div>
         </div>
       ));
     }
   };
 
-  async function getOrderData() {
+  async function getTeamData() {
     fetch("http://localhost:8000/teams")
       .then((res) => {
         return res.json();
@@ -177,7 +200,7 @@ function ManageTeams() {
           <div className="cell">options</div>
         </div>
         {editUserHtml(0)}
-        {data &&
+        {/* {data &&
           data.map((item) => (
             <div className="column-grid-2" id={item.id + "div"}>
               <div className="cell-2" id={item.id + "number"}>
@@ -206,7 +229,7 @@ function ManageTeams() {
                 <button>Remove</button>
               </div>
             </div>
-          ))}
+          ))} */}
       </div>
     </div>
   );
