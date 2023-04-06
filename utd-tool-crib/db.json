@@ -63,16 +63,16 @@
   ],
   "teams": [
     {
-      "id": 1,
-      "teamNumber": 1,
+      "teamNumber": "1",
       "teamMembers": [
         "James Garfield",
         "Winnie Garfield",
         "Jinnie Garfield",
-        "Minnie Garfield",
+        "Daksh Khetan",
         "Kai Garfield"
       ],
-      "tokens": 1
+      "tokens": "7",
+      "id": 1
     },
     {
       "id": 2,
@@ -119,18 +119,6 @@
         "Ceo Morillo",
         "Deo Morillo",
         "Feo Morillo"
-      ],
-      "tokens": 1
-    },
-    {
-      "id": 6,
-      "teamNumber": 6,
-      "teamMembers": [
-        "Daniel Hori Davilla",
-        "Baniel Hori Davilla",
-        "Caniel Hori Davilla",
-        "Laniel Hori Davilla",
-        "Maniel Hori Davilla"
       ],
       "tokens": 1
     }

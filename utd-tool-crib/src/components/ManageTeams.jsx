@@ -11,11 +11,13 @@ function ManageTeams() {
 
   const [addUser, setAdd] = useState(false);
 
-  //   const [teamNumber, setTeamnumber] = useState(0);
+  const [currentEditingId, setID] = useState(0);
 
-  //   const [teamMembers, setTeammember] = useState([]);
+  //const [editTeamNumber, setTeamnumber] = useState(0);
 
-  //   const [tokens, setToken] = useState(0);
+  //  const [editTeamMembers, setTeammember] = useState([]);
+
+  //const [editTokens, setToken] = useState(0);
 
   const removeUserEvent = (item) => {
     if (
@@ -37,8 +39,7 @@ function ManageTeams() {
   };
 
   const editUserEvent = (id) => {
-    console.log(id);
-    const idDiv = document.getElementById(id + "div");
+    setID(id);
   };
 
   useEffect(() => {
@@ -122,8 +123,125 @@ function ManageTeams() {
     }
   };
 
+  const submitEditUserEvent = (id) => {
+    if (id > 0) {
+      const editTeamMemDetailsInputs = document.querySelectorAll(
+        "input.editing-team-details-input"
+      );
+
+      let editTeamMemDetails = [];
+
+      editTeamMemDetailsInputs.forEach((input) => {
+        editTeamMemDetails.push(input.value);
+      });
+
+      const editTeamNumber = document.getElementById(id + "number").value;
+      const editTokens = document.getElementById(id + "token").value;
+      const teamdata = {
+        teamNumber: editTeamNumber,
+        teamMembers: editTeamMemDetails,
+        tokens: editTokens,
+      };
+      fetch("http://localhost:8000/teams/" + id, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(teamdata),
+      })
+        .then((res) => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+
   const editUserHtml = (id) => {
     if (id > 0) {
+      return data.map((item) => (
+        <div className="grid-2">
+          {item.id == id ? (
+            <div className="column-grid-2">
+              <div className="cell-2">
+                <input
+                  type="text"
+                  defaultValue={item["teamNumber"]}
+                  id={item.id + "number"}
+                />
+              </div>
+              <div className="editing-team-details-container">
+                {item["teamMembers"] &&
+                  item["teamMembers"].length > 0 &&
+                  item["teamMembers"].map((item_) => (
+                    <span>
+                      <input
+                        type="text"
+                        defaultValue={item_}
+                        className="editing-team-details-input"
+                      />
+                    </span>
+                  ))}
+              </div>
+              <div className="cell-2">
+                <input
+                  type="text"
+                  defaultValue={item["tokens"]}
+                  id={id + "token"}
+                />
+              </div>
+              <div className="cell-2">
+                <button
+                  onClick={() => {
+                    setID(0);
+                  }}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  onClick={() => {
+                    submitEditUserEvent(currentEditingId);
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="column-grid-2">
+              <div className="cell-2" id={item.id + "number"}>
+                {item["teamNumber"]}
+              </div>
+              <div className="single-row">
+                {item["teamMembers"] &&
+                  item["teamMembers"].length > 0 &&
+                  item["teamMembers"].map((item_) => (
+                    <span>
+                      <p>{item_ + ", "}</p>
+                    </span>
+                  ))}
+              </div>
+              <div className="cell-2">{item["tokens"]}</div>
+              <div className="cell-2">
+                <button
+                  onClick={() => {
+                    editUserEvent(item.id);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => {
+                    removeUserEvent(item);
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      ));
     } else {
       return data.map((item) => (
         <div className="column-grid-2" id={item.id + "div"}>
@@ -199,7 +317,7 @@ function ManageTeams() {
           <div className="cell">Tokens</div>
           <div className="cell">options</div>
         </div>
-        {editUserHtml(0)}
+        {editUserHtml(currentEditingId)}
         {/* {data &&
           data.map((item) => (
             <div className="column-grid-2" id={item.id + "div"}>

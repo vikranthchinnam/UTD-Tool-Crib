@@ -1,0 +1,38 @@
+.borrow-tools {
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-box {
+    max-width: fit-content;
+    background-color: rgba(21, 71, 52, 25%);
+    color:black;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    padding-bottom: 0;
+    border-radius: 5px;
+    margin-top: 150px;
+}
+
+.input-box input {
+    margin-bottom: 30px;
+    height: 25px;
+}
+
+.date label {
+    margin-right: 10px;
+}
+
+#due-date {
+    margin-right: 10px;
+}
+
+.submit{
+    margin-bottom: 30px;
+    max-width: fit-content;
+}
