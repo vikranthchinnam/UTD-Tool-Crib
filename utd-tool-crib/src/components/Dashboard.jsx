@@ -21,7 +21,7 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="dashboard">
       <div className="header">
         <p className="title">Dashboard</p>
         <div className="header-buttons">
@@ -40,16 +40,16 @@ function Dashboard() {
           <button>Log Out</button>
         </div>
       </div>
-      <div className="grid">
-        <div className="column-grid">
-            <div className="cell">Team Number</div>
-            <div className="cell">Table Number</div>
-            <div className="cell">Team Member</div>
-            <div className="cell">Due Date</div>
-            <div className="cell">Tool Name</div>
-            <div className="cell">Notes</div>
-
-            <div className="cell">Tool Limit</div>
+      <div className="table">
+      <div className="row-grid">
+        <div className="column-grid-header">
+            <div className="header-cell">Team Number</div>
+            <div className="header-cell">Table Number</div>
+            <div className="header-cell">Team Member</div>
+            <div className="header-cell">Due Date</div>
+            <div className="header-cell">Tool Name</div>
+            <div className="header-cell">Notes</div>
+            <div className="header-cell">Tool Limit</div>
         </div>
         {data && data.map((item) => 
             <div className="column-grid">
@@ -66,6 +66,7 @@ function Dashboard() {
         )}
         
         
+      </div>
       </div>
       
     </div>
