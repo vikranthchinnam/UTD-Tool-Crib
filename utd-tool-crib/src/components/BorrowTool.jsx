@@ -12,7 +12,7 @@ function BorrowTool() {
   const [dueDate, setDueDate] = useState("");
   const [dueTime, setDueTimes] = useState("");
 
-  useEffect()
+  //useEffect()
   return (
     <div>
       <div className="header">
@@ -26,18 +26,21 @@ function BorrowTool() {
         <label>Team Number</label>
         <input
           type="text"
+          className="full-input-box"
           placeholder="Type here"
           onChange={(event) => setTeamNum(event.target.value)}
         />
         <label>Team Member</label>
         <input
           type="text"
+          className="full-input-box"
           placeholder="Type here"
           onChange={(event) => setTeamMember(event.target.value)}
         />
         <label id="notes">Notes</label>
         <input
           type="text"
+          className="full-input-box"
           placeholder="Type here"
           onChange={(event) => setNotes(event.target.value)}
         />
