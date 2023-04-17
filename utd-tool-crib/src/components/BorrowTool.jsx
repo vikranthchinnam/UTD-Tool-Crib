@@ -7,10 +7,57 @@ function BorrowTool() {
   const [teamData, setTeamData] = useState([]);
   const [toolData, setToolData] = useState([]);
   const [teamNum, setTeamNum] = useState("");
-  const [teamMember, setTeamMember] = useState("");
+  const [teamMember, setTeamMember] = useState([]);
   const [notes, setNotes] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [dueTime, setDueTimes] = useState("");
+
+  const filterfunction = (event) => {};
+
+  useEffect(() => {
+    async function fetchData() {
+      await getTeamData();
+      await getToolData();
+    }
+
+    fetchData();
+  }, []);
+
+  async function getTeamData() {
+    fetch("http://localhost:8000/teams")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        setTeamData(resp);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  async function getToolData() {
+    fetch("http://localhost:8000/tools")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        setToolData(resp);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  const refactorData = (num) => {
+    if (num > 0) {
+      setTeamNum(num);
+      const currentTeam = teamData.filter((item) => item.teamNumber == num);
+      setTeamMember(currentTeam.teamMembers);
+      console.log(teamMember);
+    }
+  };
+
   return (
     <div>
       <div className="header">
@@ -25,14 +72,23 @@ function BorrowTool() {
         <input
           type="text"
           placeholder="Type here"
-          onChange={(event) => setTeamNum(event.target.value)}
+          onChange={(event) => refactorData(event.target.value)}
         />
         <label>Team Member</label>
-        <input
-          type="text"
-          placeholder="Type here"
-          onChange={(event) => setTeamMember(event.target.value)}
-        />
+        <div id="dropdown-member">
+          <input
+            type="text"
+            placeholder="Search..."
+            onKeyUp={filterfunction()}
+          />
+          {/* {teamMember &&
+            teamMember.map((entry) => (
+              <div>
+                <p>{entry}</p>
+              </div>
+            ))} */}
+        </div>
+
         <label id="notes">Notes</label>
         <input
           type="text"

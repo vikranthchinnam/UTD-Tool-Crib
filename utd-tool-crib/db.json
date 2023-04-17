@@ -121,6 +121,17 @@
         "Feo Morillo"
       ],
       "tokens": 1
+    },
+    {
+      "teamNumber": 7,
+      "teamMembers": [
+        "Alexandra Miller",
+        "Adithya Chintala",
+        "Vishnav Vijay",
+        "Vikranth"
+      ],
+      "tokens": 5,
+      "id": 6
     }
   ],
   "tools": [
