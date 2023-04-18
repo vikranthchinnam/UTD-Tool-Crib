@@ -1,69 +1,30 @@
 {
   "logs": [
     {
-      "id": 1,
-      "team_number": 1,
-      "table-number": 5,
-      "team-member": "James Garfield",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 2,
-      "tool-name": "Hammer",
-      "notes": "Lorem Ipsum see my chinny chin chin"
+      "teamNumber": "2",
+      "tableNumber": "2",
+      "teamMember": "Kai Givens",
+      "dueDate": "05/17/2023",
+      "toolLimit": 0,
+      "toolName": "Files",
+      "notes": "testing again bruh",
+      "id": 9
     },
     {
-      "id": 2,
-      "team_number": 2,
-      "table-number": 5,
-      "team-member": "Timothy Givens",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 2,
-      "tool-name": "Wrench",
-      "notes": "Lorem Ipsum see my chinny chin chin"
-    },
-    {
-      "id": 3,
-      "team_number": 3,
-      "table-number": 5,
-      "team-member": "Alecs Max Steele",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 2,
-      "tool-name": "Screw Driver",
-      "notes": "Lorem Ipsum see my chinny chin chin"
-    },
-    {
-      "id": 4,
-      "team_number": 4,
-      "table-number": 5,
-      "team-member": "Alexandra Botez",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 2,
-      "tool-name": "Plier",
-      "notes": "Lorem Ipsum see my chinny chin chin"
-    },
-    {
-      "id": 5,
-      "team_number": 5,
-      "table-number": 5,
-      "team-member": "Keo Morillo",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 4,
-      "tool-name": "Alligator Clamps",
-      "notes": "Lorem Ipsum see my chinny chin chin"
-    },
-    {
-      "id": 6,
-      "team_number": 1,
-      "table-number": 5,
-      "team-member": "Daniyal Hori Davilla",
-      "due-date": "2023-02-23T20:40",
-      "tool-limit": 4,
-      "tool-name": "Hot Glue Gun",
-      "notes": "Lorem Ipsum see my chinny chin chin"
+      "teamNumber": "1",
+      "tableNumber": "100",
+      "teamMember": "Daksh Khetan",
+      "dueDate": "04/18/2023",
+      "toolLimit": 4,
+      "toolName": "Files",
+      "notes": "",
+      "id": 10
     }
   ],
   "teams": [
     {
       "teamNumber": "1",
+      "tableNumber": "100",
       "teamMembers": [
         "James Garfield",
         "Winnie Garfield",
@@ -71,12 +32,12 @@
         "Daksh Khetan",
         "Kai Garfield"
       ],
-      "tokens": "7",
+      "tokens": 4,
       "id": 1
     },
     {
-      "id": 2,
-      "teamNumber": 2,
+      "teamNumber": "2",
+      "tableNumber": "2",
       "teamMembers": [
         "Timothy Givens",
         "Winnie Givens",
@@ -84,11 +45,13 @@
         "Minnie Givens",
         "Kai Givens"
       ],
-      "tokens": 1
+      "tokens": "5",
+      "id": 2
     },
     {
       "id": 3,
       "teamNumber": 3,
+      "tableNumber": 3,
       "teamMembers": [
         "Alecs Max Steele",
         "Becs Steele",
@@ -101,6 +64,7 @@
     {
       "id": 4,
       "teamNumber": 4,
+      "tableNumber": 4,
       "teamMembers": [
         "Alexandra Botez",
         "Balexandra Botez",
@@ -113,6 +77,7 @@
     {
       "id": 5,
       "teamNumber": 5,
+      "tableNumber": 5,
       "teamMembers": [
         "Keo Morillo",
         "Beo Morillo",
@@ -121,6 +86,18 @@
         "Feo Morillo"
       ],
       "tokens": 1
+    },
+    {
+      "teamNumber": "7",
+      "tableNumber": "6",
+      "teamMembers": [
+        "Alexandra Miller",
+        "Adithya Chintala",
+        "Vishnav Vijay",
+        "Vikranth"
+      ],
+      "tokens": "6",
+      "id": 6
     }
   ],
   "tools": [
