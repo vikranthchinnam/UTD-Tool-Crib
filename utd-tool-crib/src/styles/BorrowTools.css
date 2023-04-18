@@ -24,6 +24,10 @@
     height: 25px;
 }
 
+.full-input-box {
+    width: 100%;
+}
+
 .date label {
     margin-right: 10px;
 }
