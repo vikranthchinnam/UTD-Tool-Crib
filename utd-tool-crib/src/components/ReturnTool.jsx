@@ -7,28 +7,42 @@ import { useState, useEffect } from "react";
 function ReturnTool() {
   const [data, setData] = useState([]);
 
-  //  const [teamnumber, setNumber] = useState(0);
+  const [teamnumber, setNumber] = useState(-1);
 
-  const [toolnames, setTool] = useState([]);
+  const [items, setItem] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const _data = await getOrderData();
-      setData(_data);
+      await getOrderData();
     }
     fetchData();
   }, []);
 
+  const handleRemoveEvent = (event) => {
+    for (let i = 0; i < items.length; i++) {
+      if (
+        document.getElementById(items[i].toolName) &&
+        document.getElementById(items[i].toolName).checked
+      ) {
+        fetch("http://localhost:8000/logs/" + items[i].id, {
+          method: "DELETE",
+        }).catch((err) => {
+          console.log(err.message);
+        });
+      }
+    }
+  };
+
   const handleEnterData = (event) => {
-    // setNumber(event.target.value);
+    setNumber(event.target.value);
     const filteredData = data.filter(
-      (entry) => entry["team-number"] == event.target.value
+      (entry) => entry["teamNumber"] == event.target.value
     );
     if (filteredData.length > 0) {
-      const toolNames = filteredData.map((entry) => entry["tool-name"]);
-      setTool(toolNames);
+      // const toolNames = filteredData.map((entry) => {toolName: entry["toolName"], identity: entry.id});
+      setItem(filteredData);
     } else {
-      setTool([]);
+      setItem([]);
     }
     // delete orderData[0];
   };
@@ -45,7 +59,16 @@ function ReturnTool() {
   // }
 
   async function getOrderData() {
-    return orderData;
+    fetch("http://localhost:8000/logs/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        setData(resp);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
   return (
     <div>
@@ -58,17 +81,22 @@ function ReturnTool() {
       </div>
       <div>
         <div>
-          <p>Team Number</p>
+          <p>Team Number:</p>
           <input type="text" id="teamnumber" onChange={handleEnterData} />
         </div>
         <div>
-          {toolnames &&
-            toolnames.map((tool) => (
+          {items &&
+            items.map((item) => (
               <div>
-                <input type="checkbox" id={tool} />
-                <p>{tool}</p>
+                <input type="checkbox" id={item.toolName} />
+                <p>{item.toolName}</p>
               </div>
             ))}
+        </div>
+        <div>
+          <Link to="/">
+            <button onClick={() => handleRemoveEvent()}>remove</button>
+          </Link>
         </div>
       </div>
     </div>
