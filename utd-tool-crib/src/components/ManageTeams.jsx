@@ -47,7 +47,11 @@ function ManageTeams() {
 
   // processes before page render
   useEffect(() => {
+    async function fetchData(){
       getTeamData();
+    }
+      fetchData();
+      
   }, []);
 
   const cancelEvent = (event) => {
@@ -159,10 +163,14 @@ function ManageTeams() {
   async function getTeamData() {
     
     axios.get('http://localhost:5000/team').then((response) => {
-      setTeamList(response.data) //teamList is now response.data
-      console.log(response.data)
+      setTeamList(response.data); //teamList is now response.data
+      console.log(response.data);
     })
 
+  }
+
+  const returnTeamMemberArrays = (membersString) => {
+    return membersString.split(",");
   }
 
   const editUserHtml = (id) => {
@@ -226,7 +234,7 @@ function ManageTeams() {
           ) : (
             <div className="column-grid-2">
               <div className="cell-2" id={item.id + "number"}>
-                {item["teamNumber"]}
+                {item["number"]}
               </div>
               <div className="cell-2" id={item.id + "tnumber"}>
                 {item["tableNumber"]}
@@ -267,15 +275,15 @@ function ManageTeams() {
       return teamList && teamList.map((item) => (
         <div className="column-grid-2" id={item.id + "div"}>
           <div className="cell-2" id={item.id + "number"}>
-            {item["teamNumber"]}
+            {item["number"]}
           </div>
           <div className="cell-2" id={item.id + "tnumber"}>
             {item["tableNumber"]}
           </div>
           <div className="single-row">
-            {item["teamMembers"] &&
-              item["teamMembers"].length > 0 &&
-              item["teamMembers"].map((item_) => (
+            {item["members"] &&
+              item["members"].length > 0 &&
+              returnTeamMemberArrays(item["members"]).map((item_) => (
                 <span>
                   <p>{item_ + ", "}</p>
                 </span>

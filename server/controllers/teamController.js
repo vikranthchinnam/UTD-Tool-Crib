@@ -13,6 +13,7 @@ const getTeams = asyncHandler(async (req, res) => {
     else {
       res.send(result);
     }
+
   })
 });
 
