@@ -96,6 +96,8 @@ function ManageTeams() {
         <div>
           <p>Team Number:</p>
           <input type="text" name="" id="teamnumber" />
+          <p>Table Number:</p>
+          <input type="text" name="" id="tablenumber" />
           <p>Team Members:</p>
           {Array.apply(null, Array(newMemberCounter)).map((c, i) => (
             <div className="team-member-container">
@@ -131,26 +133,26 @@ function ManageTeams() {
         editTeamMemDetails.push(input.value);
       });
 
-      // const editTeamNumber = document.getElementById(id + "number").value;
-      // const editTokens = document.getElementById(id + "token").value;
-      // const teamdata = {
-      //   teamNumber: editTeamNumber,
-      //   teamMembers: editTeamMemDetails,
-      //   tokens: editTokens,
-      // };
-      // fetches dummy data of teams
-      // route axios to teams editteams
-      // fetch("http://localhost:8000/teams/" + id, {
-      //   method: "PUT",
-      //   headers: { "content-type": "application/json" },
-      //   body: JSON.stringify(teamdata),
-      // })
-      //   .then((res) => {
-      //     window.location.reload();
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.message);
-      //   });
+      const editTeamNumber = document.getElementById(id + "number").value;
+      const editTableNumber = document.getElementById(id + "tnumber").value;
+      const editTokens = document.getElementById(id + "token").value;
+      const teamdata = {
+        teamNumber: editTeamNumber,
+        tableNumber: editTableNumber,
+        teamMembers: editTeamMemDetails,
+        tokens: editTokens,
+      };
+      fetch("http://localhost:8000/teams/" + id, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(teamdata),
+      })
+        .then((res) => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
   };
 
@@ -174,6 +176,13 @@ function ManageTeams() {
                   type="text"
                   defaultValue={item["teamNumber"]}
                   id={item.id + "number"}
+                />
+              </div>
+              <div className="cell-2">
+                <input
+                  type="text"
+                  defaultValue={item["tableNumber"]}
+                  id={item.id + "tnumber"}
                 />
               </div>
               <div className="editing-team-details-container">
@@ -219,6 +228,9 @@ function ManageTeams() {
               <div className="cell-2" id={item.id + "number"}>
                 {item["teamNumber"]}
               </div>
+              <div className="cell-2" id={item.id + "tnumber"}>
+                {item["tableNumber"]}
+              </div>
               <div className="single-row">
                 {item["teamMembers"] &&
                   item["teamMembers"].length > 0 &&
@@ -256,6 +268,9 @@ function ManageTeams() {
         <div className="column-grid-2" id={item.id + "div"}>
           <div className="cell-2" id={item.id + "number"}>
             {item["teamNumber"]}
+          </div>
+          <div className="cell-2" id={item.id + "tnumber"}>
+            {item["tableNumber"]}
           </div>
           <div className="single-row">
             {item["teamMembers"] &&
@@ -310,6 +325,7 @@ function ManageTeams() {
       <div className="grid-2">
         <div className="column-grid-2">
           <div className="cell">Team Number</div>
+          <div className="cell">Table Number</div>
           <div className="cell">Team Members</div>
           <div className="cell">Tokens</div>
           <div className="cell">options</div>
