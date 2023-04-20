@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {getTools, deleteTools, exportTools} = require('../controller/toolController');
+const {getTools, setTools, deleteTools, exportTools} = require('../controller/toolController');
 
 // available to admin only
 router.get('/', getTools)
+router.post('/', setTools)
 router.delete('/:id', deleteTools)
 router.post('/', exportTools)
 
-module.exports = {
-  getTools,
-  deleteTools,
-  exportTools,
-}
+module.exports = router

@@ -1,11 +1,12 @@
 const asyncHandler = require("express-async-handler")
 const queryTeam = require("../db-service")
+
 /*
 @desc Fetches the team table from the database
 @route GET /teams
 @access Private
 */
-const getTeams = asyncHandler(async (req, res) => {
+const getDashboard = asyncHandler(async (req, res) => {
   queryTeam.query("SELECT * FROM manageteams ORDER BY id DESC", (err, result) => {
     if (err) {
       console.log(err);
@@ -21,20 +22,17 @@ const getTeams = asyncHandler(async (req, res) => {
 @route POST /teams
 @access Private
 */
-const setTeams = asyncHandler(async (req, res) => {
-  const postNumber = req.body.teamNumber;
-  const postMember = req.body.teamMembersValues.join(", ");
-  const postToken = req.body.tokenNumber;
+const setDashboard = asyncHandler(async (req, res) => {
 
   queryTeam.query(
-    "INSERT INTO manageteams (number, members, tokens) VALUES (?,?,?)",
-    [postNumber, postMember, postToken], 
+    "INSERT INTO dashboard (teamNumber, tableNumber, teamMember, dueDate, toolLimit, toolName, notes) VALUES (?,?,?)",
+    [teamNumber, tableNumber, teamMember, dueDate, toolLimit, toolName, notes], 
     (err, result) => {
       if (err) {
         console.log(err);
       }
       else {
-        res.send("Values Inserted");
+        res.send("Values inserted into dashboard");
       }
     }
   );
@@ -47,7 +45,7 @@ const setTeams = asyncHandler(async (req, res) => {
 @access Private
 */
 
-const deleteTeams = async (req, res) => {
+const deleteDashboard = async (req, res) => {
   res.status(200).json({message: `deleted team number ${req.params.id}`})
 
   const id = req.params.id
@@ -66,13 +64,9 @@ const deleteTeams = async (req, res) => {
 @route
 @access
 */
-const exportTeams = (req, res) => {
-  res.status(200).json({message: 'exported teams'})
-}
 
 module.exports = {
-  getTeams,
-  setTeams,
-  deleteTeams,
-  exportTeams,
+  getDashboard,
+  setDashboard,
+  deleteDashboard
 }

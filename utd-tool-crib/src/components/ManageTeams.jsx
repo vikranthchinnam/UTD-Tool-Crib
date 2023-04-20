@@ -1,34 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
 import "../styles/header.css";
 import "../styles/manageTeams.css";
 
 function ManageTeams() {
-  const [counter, setCounter] = useState(1);
+  const apiURL = "http://localhost:5000/team";
 
-  const [data, setData] = useState([]);
+  const [newMemberCounter, setCounter] = useState(1); // team Member Counter
+  
+  const [addUser, setAdd] = useState(false); // add a team (user)
 
-  const [addUser, setAdd] = useState(false);
+  const [currentEditingId, setID] = useState(0); // primary key identifier for each team
 
-  const [currentEditingId, setID] = useState(0);
+  // states for each input: team number, members, and token
+  const [teamNumber, setTeamNumber] = useState(0);
+  const [teamMembers, setTeamMember] = useState([]);
+  const [token, setToken] = useState(0);
 
-  //const [editTeamNumber, setTeamnumber] = useState(0);
-
-  //  const [editTeamMembers, setTeammember] = useState([]);
-
-  //const [editTokens, setToken] = useState(0);
+  const [teamList, setTeamList] = useState([]); // state to load the table content
 
   const removeUserEvent = (item) => {
     if (
       window.confirm(
         "Do you want to remove team number " + item.teamNumber + "?"
-      )
-    ) {
-      fetch("http://localhost:8000/teams/" + item.id, {
-        method: "DELETE",
-      })
+      )) 
+    {
+      // fetches dummy data of teams
+      // route axios to teams delete
+      // instead of item.id it could be ${id}
+      axios.delete(apiURL + item.id)
         .then((res) => {
+          console.log('Successfully deleted id ' + item.id)
           alert("Removed successfully.");
           window.location.reload();
         })
@@ -42,12 +45,9 @@ function ManageTeams() {
     setID(id);
   };
 
+  // processes before page render
   useEffect(() => {
-    async function fetchData() {
-      const _data = await getTeamData();
-    }
-
-    fetchData();
+      getTeamData();
   }, []);
 
   const cancelEvent = (event) => {
@@ -64,34 +64,30 @@ function ManageTeams() {
       teamMemDetails.forEach((input) => {
         teamMembersValues.push(input.value);
       });
+      setTeamMember(teamMembersValues)
 
-      let teamNumber = Number(document.getElementById("teamnumber").value);
-
-      let tokenNumber = Number(document.getElementById("tokennumber").value);
-
-      const teamdata = {
+      // fetches data of teams
+      axios.post('http://localhost:5000/team', {
         teamNumber: teamNumber,
-        teamMembers: teamMembersValues,
-        tokens: tokenNumber,
-      };
-      fetch("http://localhost:8000/teams", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(teamdata),
+        teamMembersValues: teamMembersValues,
+        tokenNumber: token,
       })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      // console.log(teamdata);
+
+      // use teamlist object, but change the attributes
+      setTeamList([...teamList, {
+        number: teamNumber,
+        members: teamMembers,
+        tokens: token,
+      }
+      ])
     }
 
     setAdd(!addUser);
   };
 
   const addInputEvent = (event) => {
-    setCounter(counter + 1);
+    setCounter(newMemberCounter + 1);
   };
 
   const addUserHtml = () => {
@@ -101,7 +97,7 @@ function ManageTeams() {
           <p>Team Number:</p>
           <input type="text" name="" id="teamnumber" />
           <p>Team Members:</p>
-          {Array.apply(null, Array(counter)).map((c, i) => (
+          {Array.apply(null, Array(newMemberCounter)).map((c, i) => (
             <div className="team-member-container">
               <input type="text" />
             </div>
@@ -135,30 +131,41 @@ function ManageTeams() {
         editTeamMemDetails.push(input.value);
       });
 
-      const editTeamNumber = document.getElementById(id + "number").value;
-      const editTokens = document.getElementById(id + "token").value;
-      const teamdata = {
-        teamNumber: editTeamNumber,
-        teamMembers: editTeamMemDetails,
-        tokens: editTokens,
-      };
-      fetch("http://localhost:8000/teams/" + id, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(teamdata),
-      })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      // const editTeamNumber = document.getElementById(id + "number").value;
+      // const editTokens = document.getElementById(id + "token").value;
+      // const teamdata = {
+      //   teamNumber: editTeamNumber,
+      //   teamMembers: editTeamMemDetails,
+      //   tokens: editTokens,
+      // };
+      // fetches dummy data of teams
+      // route axios to teams editteams
+      // fetch("http://localhost:8000/teams/" + id, {
+      //   method: "PUT",
+      //   headers: { "content-type": "application/json" },
+      //   body: JSON.stringify(teamdata),
+      // })
+      //   .then((res) => {
+      //     window.location.reload();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     }
   };
 
+  async function getTeamData() {
+    
+    axios.get('http://localhost:5000/team').then((response) => {
+      setTeamList(response.data) //teamList is now response.data
+      console.log(response.data)
+    })
+
+  }
+
   const editUserHtml = (id) => {
     if (id > 0) {
-      return data.map((item) => (
+      return teamList.map((item) => (
         <div className="grid-2">
           {item.id == id ? (
             <div className="column-grid-2">
@@ -243,7 +250,9 @@ function ManageTeams() {
         </div>
       ));
     } else {
-      return data.map((item) => (
+
+      // teamlist now is response.data
+      return teamList && teamList.map((item) => (
         <div className="column-grid-2" id={item.id + "div"}>
           <div className="cell-2" id={item.id + "number"}>
             {item["teamNumber"]}
@@ -279,18 +288,6 @@ function ManageTeams() {
     }
   };
 
-  async function getTeamData() {
-    fetch("http://localhost:8000/teams")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
   return (
     <div>
       <div className="header">

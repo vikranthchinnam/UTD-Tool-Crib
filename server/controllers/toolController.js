@@ -1,12 +1,13 @@
 const asyncHandler = require("express-async-handler")
-const queryTeam = require("../db-service")
+const queryTool = require("../db-service")
+
 /*
-@desc Fetches the team table from the database
+@desc Fetches the tool table from the database
 @route GET /teams
 @access Private
 */
-const getTeams = asyncHandler(async (req, res) => {
-  queryTeam.query("SELECT * FROM manageteams ORDER BY id DESC", (err, result) => {
+const getTools = asyncHandler(async (req, res) => {
+  queryTool.query("SELECT * FROM managetools ORDER BY id DESC", (err, result) => {
     if (err) {
       console.log(err);
     }
@@ -17,24 +18,23 @@ const getTeams = asyncHandler(async (req, res) => {
 });
 
 /*
-@desc Adds the team onto the team table
+@desc Adds the tool onto the tool table
 @route POST /teams
 @access Private
 */
-const setTeams = asyncHandler(async (req, res) => {
-  const postNumber = req.body.teamNumber;
-  const postMember = req.body.teamMembersValues.join(", ");
-  const postToken = req.body.tokenNumber;
+const setTools = asyncHandler(async (req, res) => {
+  const toolName = req.body.toolName;
 
   queryTeam.query(
-    "INSERT INTO manageteams (number, members, tokens) VALUES (?,?,?)",
-    [postNumber, postMember, postToken], 
+
+    "INSERT INTO managetools (toolName) VALUES (?,?,?)",
+    toolName, 
     (err, result) => {
       if (err) {
         console.log(err);
       }
       else {
-        res.send("Values Inserted");
+        res.send("Tool name inserted");
       }
     }
   );
@@ -42,7 +42,7 @@ const setTeams = asyncHandler(async (req, res) => {
 });
 
 /*
-@desc Deletes the team from the manageteams table
+@desc Deletes the tool from the managetools table
 @route DELETE /teams:id
 @access Private
 */
@@ -71,8 +71,8 @@ const exportTeams = (req, res) => {
 }
 
 module.exports = {
-  getTeams,
-  setTeams,
-  deleteTeams,
-  exportTeams,
+  getTools,
+  setTools,
+  deleteTools,
+  exportTools,
 }
