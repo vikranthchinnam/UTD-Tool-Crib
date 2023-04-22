@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import "../styles/ReturnTool.css";
 import orderData from "../data/db.json";
 import { useState, useEffect } from "react";
 //import myFunction from "../scripts/returnTools.js"
@@ -71,14 +72,19 @@ function ReturnTool() {
       });
   }
   return (
-    <div>
+    <div className="return-tool">
       <div className="header">
-        <p className="title">Return Tool</p>
+        <div className="title">
+            <h1>Return Tool</h1>
+        </div>
 
-        <Link to="/">
-          <button>Back</button>
-        </Link>
+        <div className="header-buttons">
+            <Link to="/">
+              <button>Back</button>
+            </Link>
+        </div>
       </div>
+
       <div>
         <div>
           <p>Team Number:</p>

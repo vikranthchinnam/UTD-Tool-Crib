@@ -1,10 +1,11 @@
 .return-tools {
     color: black;
     font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.return-tool .header-buttons {
+    justify-content: right;
 }
 
 .input-box {

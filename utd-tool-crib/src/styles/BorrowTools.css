@@ -1,10 +1,11 @@
 .borrow-tools {
     color: black;
     font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.borrow-tools .header-buttons {
+  justify-content: right;
 }
 
 .input-box {
