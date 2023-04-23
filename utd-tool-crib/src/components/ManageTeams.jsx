@@ -13,23 +13,29 @@ function ManageTeams() {
 
   const [currentEditingId, setID] = useState(0); // primary key identifier for each team
 
-  // states for each input: team number, members, and token
-  const [teamNumber, setTeamNumber] = useState(0);
-  const [teamMembers, setTeamMember] = useState([]);
-  const [token, setToken] = useState(0);
-
   const [teamList, setTeamList] = useState([]); // state to load the table content
 
+    // processes before page render
+  useEffect(() => {
+    async function fetchData() {
+      getTeamData();
+    }
+      
+    fetchData();
+  }, []);
+
+  const editUserEvent = (id) => {
+    setID(id);
+    console.log(id)
+  };
+
+  // Deletes a team (works)
   const removeUserEvent = (item) => {
-    if (
-      window.confirm(
-        "Do you want to remove team number " + item.teamNumber + "?"
-      )) 
-    {
-      // fetches dummy data of teams
-      // route axios to teams delete
-      // instead of item.id it could be ${id}
-      axios.delete(apiURL + item.id)
+    console.log("Deleting item " + item.id + " ...")
+
+    if (window.confirm("Do you want to remove team number " + item.number + "?")) {
+
+      axios.delete(apiURL + "/" + item.id)
         .then((res) => {
           console.log('Successfully deleted id ' + item.id)
           alert("Removed successfully.");
@@ -38,22 +44,11 @@ function ManageTeams() {
         .catch((err) => {
           console.log(err.message);
         });
+
     }
   };
 
-  const editUserEvent = (id) => {
-    setID(id);
-  };
-
-  // processes before page render
-  useEffect(() => {
-    async function fetchData(){
-      getTeamData();
-    }
-      fetchData();
-      
-  }, []);
-
+  // cancels adding user (team)
   const cancelEvent = (event) => {
     setAdd(!addUser);
   };
@@ -68,23 +63,25 @@ function ManageTeams() {
       teamMemDetails.forEach((input) => {
         teamMembersValues.push(input.value);
       });
-      setTeamMember(teamMembersValues)
+      // setTeamMember(teamMembersValues)
+
+      // The webpage is a Document, and it is an object within HTML
+      // getElementbyId is a method part of the object that gets the id of an element
+      // <id=""> is what it is in this case
+      let teamNumber = Number(document.getElementById("teamnumber").value);
+      let tableNumber = Number(document.getElementById("tablenumber").value);
+      let tokenNumber = Number(document.getElementById("tokennumber").value);
 
       // fetches data of teams
       axios.post('http://localhost:5000/team', {
         teamNumber: teamNumber,
+        tableNumber: tableNumber,
         teamMembersValues: teamMembersValues,
-        tokenNumber: token,
-      })
-      // console.log(teamdata);
+        tokenNumber: tokenNumber,
+      }).then((resp) => {
+        window.location.reload();
+      });
 
-      // use teamlist object, but change the attributes
-      setTeamList([...teamList, {
-        number: teamNumber,
-        members: teamMembers,
-        tokens: token,
-      }
-      ])
     }
 
     setAdd(!addUser);
@@ -111,7 +108,6 @@ function ManageTeams() {
           <button onClick={addInputEvent}>new member</button>
           <p>Token:</p>
           <input type="text" id="tokennumber" defaultValue={5} />
-
           <button onClick={addUserEvent}>submit</button>
           <button onClick={cancelEvent}>Cancel</button>
         </div>
@@ -127,6 +123,7 @@ function ManageTeams() {
 
   const submitEditUserEvent = (id) => {
     if (id > 0) {
+
       const editTeamMemDetailsInputs = document.querySelectorAll(
         "input.editing-team-details-input"
       );
@@ -140,23 +137,26 @@ function ManageTeams() {
       const editTeamNumber = document.getElementById(id + "number").value;
       const editTableNumber = document.getElementById(id + "tnumber").value;
       const editTokens = document.getElementById(id + "token").value;
-      const teamdata = {
+      
+      // const teamdata = {
+      //   teamNumber: editTeamNumber,
+      //   tableNumber: editTableNumber,
+      //   teamMembers: editTeamMemDetails,
+      //   tokens: editTokens,
+      // };
+
+      axios.put(apiURL, {
         teamNumber: editTeamNumber,
         tableNumber: editTableNumber,
-        teamMembers: editTeamMemDetails,
-        tokens: editTokens,
-      };
-      fetch("http://localhost:8000/teams/" + id, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(teamdata),
+        tokenNumber: editTokens,
+        id: id
       })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      .then((resp) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
     }
   };
 
@@ -177,7 +177,7 @@ function ManageTeams() {
     if (id > 0) {
       return teamList.map((item) => (
         <div className="grid-2">
-          {item.id == id ? (
+          {item.id === id ? (
             <div className="column-grid-2">
               <div className="cell-2">
                 <input
@@ -232,6 +232,8 @@ function ManageTeams() {
               </div>
             </div>
           ) : (
+
+            // If edit html is not displayed
             <div className="column-grid-2">
               <div className="cell-2" id={item.id + "number"}>
                 {item["number"]}
