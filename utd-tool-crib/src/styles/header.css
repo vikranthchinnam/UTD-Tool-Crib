@@ -1,88 +1,36 @@
-body{
-    margin: 0;
-    padding-top: 100px;
-    padding-left: 40px;
-    padding-right: 40px;
-} 
-
-.header {
-    display: flex;
-    flex-direction: row;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 80px;
-    justify-content: space-between;
-    background-color: #E87500;
-    position: fixed;
-    align-items: center;
-    padding-right: 30px;
+body{    
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.title {
-    color: #EDF2F4;
-    padding-left: 25px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 36px;
-    font-weight: 500;
+.header h1 {
+    color: #e87500;
+    padding-left: 100px;
 }
-
 
 .header-buttons {
+    background-color: #e87500;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 10px;
+    justify-content: space-between;
 }
 
-button {
-    margin: 5px;
-    padding: 10px;
-    width: flex;
-    height: flex;
-    background-color: #154734;
-    color: #EDF2F4;
-    box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    border-width: 0;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+.header-buttons button {
+    background-color: #e87500;
+    border: none;
+    box-shadow: none;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
     transition: all 0.15s;
 }
 
-button:hover {
-    box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.5);
+.header-buttons button:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
-
-/* .table {
-    background-color: #154734;
-    margin: 25px;
-    display: flex;
-    justify-content: center;
-    border-radius: 3px;
-    margin-top: 50px;
-} */
-
-/* th {
-    background-color: #154734;
-    color: #EDF2F4;
-    width: 200px;
-    height: 30px;
-    text-align: left;
-}
-
-td {
-    background-color: #EDF2F4;
-    color: #154734;
-}
-
-#past-due {
-    color: red;
-} */

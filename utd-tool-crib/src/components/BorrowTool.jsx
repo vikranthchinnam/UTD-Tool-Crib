@@ -144,13 +144,17 @@ function BorrowTool() {
   };
 
   return (
-    <div>
+    <div className="borrow-tools">
       <div className="header">
-        <p className="title">Borrow Tool</p>
+        <div className="title">
+            <h1>Borrow Tool</h1>
+        </div>
 
-        <Link to="/">
-          <button>Back</button>
-        </Link>
+        <div className="header-buttons">
+            <Link to="/">
+              <button>Back</button>
+            </Link>
+        </div>
       </div>
       <div className="input-box">
         <label>Team Number</label>

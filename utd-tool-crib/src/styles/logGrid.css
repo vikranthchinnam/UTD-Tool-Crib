@@ -3,14 +3,12 @@
     color: #154734;
 }
 
-.table{
-    margin-top: 50px;
-}
-
 .grid{
     display: grid;
     grid-template-columns: 1fr;
-    
+    margin-top: 50px;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 .column-grid{
@@ -21,7 +19,7 @@
 .cell{
     border-style: solid;
     border-width: 1px;
-    text-align: start;
+    text-align: center;
     padding: 10px;
     min-width: fit-content;
 }
@@ -39,5 +37,5 @@
     border-width: 1px;
     border-color: #154734;
     padding: 5px;
-    text-align: start;
+    text-align: center;
 }

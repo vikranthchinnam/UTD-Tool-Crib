@@ -314,15 +314,19 @@ function ManageTeams() {
   };
 
   return (
-    <div>
+    <div className="manage-teams">
       <div className="header">
-        <p className="title">Manage Teams</p>
+          <div className="title">
+            <h1>Admin Panel</h1>
+          </div>
 
         <div className="header-buttons">
+          <Link to="/Manage-Teams">
+            <button id="manage-teams-button">Manage Teams</button>
+          </Link>
           <Link to="/Manage-Tools">
             <button>Manage Tools</button>
           </Link>
-
           <button>Create Users</button>
           <Link to="/">
             <button>Back</button>

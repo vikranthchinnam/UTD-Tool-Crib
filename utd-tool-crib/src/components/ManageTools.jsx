@@ -93,14 +93,18 @@ function ManageTools() {
     }
   };
   return (
-    <div>
+    <div className="manage-tools">
       <div className="header">
-        <p className="title">Manage Tools</p>
+          <div className="title">
+            <h1>Admin Panel</h1>
+          </div>
         <div className="header-buttons">
           <Link to="/Manage-Teams">
             <button>Manage Teams</button>
           </Link>
-
+          <Link to="/Manage-Tools">
+            <button id="manage-tools-button">Manage Tools</button>
+          </Link>
           <button>Create Users</button>
           <Link to="/">
             <button>Dashboard</button>
