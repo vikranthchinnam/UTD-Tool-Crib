@@ -309,20 +309,26 @@ function ManageTeams() {
         console.log(err.message);
       });
   }
+
+  const inputFile = (event) => {
+    const file = document.getElementById("file-input");
+    let fileName = [];
+    file.addEventListener("change", (event) => {
+      fileName = file.value.split(".");
+    });
+    if (fileName.length > 0 && fileName[1] == "xlsx") {
+    }
+  };
   return (
-    <div className="manage-teams">
+    <div>
       <div className="header">
-          <div className="title">
-            <h1>Admin Panel</h1>
-          </div>
+        <p className="title">Manage Teams</p>
 
         <div className="header-buttons">
-          <Link to="/Manage-Teams">
-            <button id="manage-teams-button">Manage Teams</button>
-          </Link>
           <Link to="/Manage-Tools">
             <button>Manage Tools</button>
           </Link>
+
           <button>Create Users</button>
           <Link to="/">
             <button>Back</button>
@@ -331,7 +337,9 @@ function ManageTeams() {
       </div>
 
       <div>{addUserHtml()}</div>
-
+      <div>
+        <input type="file" id="file-input" onClick={() => inputFile()} />
+      </div>
       <div className="grid-2">
         <div className="column-grid-2">
           <div className="cell">Team Number</div>
