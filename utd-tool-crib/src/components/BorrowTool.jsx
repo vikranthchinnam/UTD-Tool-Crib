@@ -156,7 +156,7 @@ function BorrowTool() {
             </Link>
         </div>
       </div>
-      <div className="input-box">
+      <center><div className="input-box">
         <label>Team Number</label>
         <input
           type="text"
@@ -242,7 +242,6 @@ function BorrowTool() {
           placeholder="Type here"
           onChange={(event) => setNotes(event.target.value)}
         />
-        <div className="date">
           <label>Due Date</label>
           <input
             type="text"
@@ -251,8 +250,6 @@ function BorrowTool() {
             defaultValue={dueDate}
             onChange={(event) => setDueDate(event.target.value)}
           />
-        </div>
-        <center>
           <Link to="/">
             <button
               className="submit"
@@ -263,8 +260,7 @@ function BorrowTool() {
               Submit
             </button>
           </Link>
-        </center>
-      </div>
+      </div></center>
     </div>
   );
 }

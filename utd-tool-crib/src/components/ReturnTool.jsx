@@ -85,15 +85,15 @@ function ReturnTool() {
         </div>
       </div>
 
-      <div>
+      <center><div className="input-box">
         <div>
-          <p>Team Number:</p>
+          <p>Team Number</p>
           <input type="text" id="teamnumber" onChange={handleEnterData} />
         </div>
         <div>
           {items &&
             items.map((item) => (
-              <div>
+              <div className="tool-list">
                 <input type="checkbox" id={item.toolName} />
                 <p>{item.toolName}</p>
               </div>
@@ -101,10 +101,10 @@ function ReturnTool() {
         </div>
         <div>
           <Link to="/">
-            <button onClick={() => handleRemoveEvent()}>remove</button>
+            <button onClick={() => handleRemoveEvent()}>Remove</button>
           </Link>
         </div>
-      </div>
+      </div></center>
     </div>
   );
 }
