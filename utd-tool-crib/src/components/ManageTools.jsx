@@ -77,17 +77,21 @@ function ManageTools() {
   const addToolHtml = () => {
     if (addTool) {
       return (
-        <div>
+        <div className="add-input-box">
+          <h2>Add Tool</h2>
+          <hr />
           <p>Tool Name</p>
           <input type="text" onChange={(e) => setToolName(e.target.value)} />
-          <button onClick={cancelAddUserEvent}>Cancel</button>
+          <div className="add-bttn">
           <button onClick={submitToolEvent}>Submit</button>
+          <button onClick={cancelAddUserEvent}>Cancel</button>
+          </div>
         </div>
       );
     } else {
       return (
         <div>
-          <button onClick={addUserEvent}>Add Tool</button>
+          <button className="add" onClick={addUserEvent}>Add Tool</button>
         </div>
       );
     }
@@ -111,12 +115,12 @@ function ManageTools() {
           </Link>
         </div>
       </div>
-      {addToolHtml()}
+      <div className="add-button">{addToolHtml()}</div>
       <div className="grid-3">
-        <div className="column-grid-3">
-          <div className="cell">Id</div>
-          <div className="cell">Tool</div>
-          <div className="cell">options</div>
+        <div className="column-grid-header">
+          <div className="header-cell">Id</div>
+          <div className="header-cell">Tool</div>
+          <div className="header-cell">options</div>
         </div>
 
         {data &&

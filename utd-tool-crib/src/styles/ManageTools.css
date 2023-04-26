@@ -5,7 +5,7 @@
 .grid-3{
     display: grid;
     grid-template-columns: 1fr;
-    
+    margin: 100px;
 }
 
 .column-grid-3{
@@ -16,6 +16,71 @@
 
 .cell-2{
     border-style: solid;
-    border-width: 0.7px;
+    border-width: 1px;
     text-align: center;
+}
+
+.add-button {
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.add {
+    background-color: white;
+    border: none;
+    font-size: large;
+    font-weight: bold;
+    color: #154734;
+    transition: all 0.15s;
+}
+
+.add:hover {
+    cursor: pointer;
+    color: #e87500;
+    text-decoration: underline;
+}
+
+.add-input-box h2 {
+    color: #e87500;
+    font-weight: bold;
+}
+
+.add-input-box hr {
+    border: 1px solid #e87500;
+    margin-bottom: 25px;
+}
+
+.add-input-box p {
+    font-weight: bold;
+    color: #154734;
+}
+
+.add-input-box input {
+    height: 25px;
+    width: 25%;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+.add-bttn {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-input-box button {
+    background-color: #154734;
+    color: white;
+    margin-bottom: 25px;
+    width: 26%;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    transition: all 0.15s;
+}
+
+.add-input-box button:hover {
+    text-decoration: underline;
+    background-color: #0e2f23;
+    cursor: pointer;
 }

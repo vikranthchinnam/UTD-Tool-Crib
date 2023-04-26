@@ -5,7 +5,7 @@
 .grid-2{
     display: grid;
     grid-template-columns: 1fr;
-    
+    margin: 100px;
 }
 
 .column-grid-2{

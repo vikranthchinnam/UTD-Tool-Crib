@@ -98,29 +98,33 @@ function ManageTeams() {
   const addUserHtml = () => {
     if (addUser) {
       return (
-        <div>
-          <p>Team Number:</p>
+        <div className="add-input-box">
+          <h2>Add User</h2>
+          <hr />
+          <p>Team Number</p>
           <input type="text" name="" id="teamnumber" />
-          <p>Table Number:</p>
+          <p>Table Number</p>
           <input type="text" name="" id="tablenumber" />
-          <p>Team Members:</p>
+          <p>Team Members</p>
           {Array.apply(null, Array(counter)).map((c, i) => (
             <div className="team-member-container">
               <input type="text" />
             </div>
           ))}
           <button onClick={addInputEvent}>new member</button>
-          <p>Token:</p>
+          <p>Token</p>
           <input type="text" id="tokennumber" defaultValue={5} />
 
+          <div className="add-bttn">
           <button onClick={addUserEvent}>submit</button>
           <button onClick={cancelEvent}>Cancel</button>
+          </div>
         </div>
       );
     } else {
       return (
         <div>
-          <button onClick={addUserEvent}>Add User</button>
+          <button className="add" onClick={addUserEvent}>Add User</button>
         </div>
       );
     }
@@ -330,15 +334,15 @@ function ManageTeams() {
         </div>
       </div>
 
-      <div>{addUserHtml()}</div>
+      <div className="add-button">{addUserHtml()}</div>
 
       <div className="grid-2">
-        <div className="column-grid-2">
-          <div className="cell">Team Number</div>
-          <div className="cell">Table Number</div>
-          <div className="cell">Team Members</div>
-          <div className="cell">Tokens</div>
-          <div className="cell">options</div>
+        <div className="column-grid-header">
+          <div className="header-cell">Team Number</div>
+          <div className="header-cell">Table Number</div>
+          <div className="header-cell">Team Members</div>
+          <div className="header-cell">Tokens</div>
+          <div className="header-cell">options</div>
         </div>
         {editUserHtml(currentEditingId)}
         {/* {data &&
