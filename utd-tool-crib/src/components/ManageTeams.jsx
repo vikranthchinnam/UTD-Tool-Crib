@@ -109,9 +109,9 @@ function ManageTeams() {
           {Array.apply(null, Array(counter)).map((c, i) => (
             <div className="team-member-container">
               <input type="text" />
+              <button id="new-member" onClick={addInputEvent}>+</button>
             </div>
           ))}
-          <button onClick={addInputEvent}>new member</button>
           <p>Token</p>
           <input type="text" id="tokennumber" defaultValue={5} />
 
@@ -249,7 +249,7 @@ function ManageTeams() {
                 >
                   Edit
                 </button>
-                <button
+                <button id="remove"
                   onClick={() => {
                     removeUserEvent(item);
                   }}

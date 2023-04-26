@@ -93,7 +93,7 @@ function Dashboard() {
         {data &&
           data.map((item) =>
             compareDate(item.dueDate) ? (
-              <div className="column-grid">
+              <div id="late" className="column-grid">
                 <div className="cell">
                   <p style={{ color: "red" }}>{item["teamNumber"]}</p>
                 </div>

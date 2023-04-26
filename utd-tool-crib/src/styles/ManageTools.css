@@ -8,10 +8,27 @@
     margin: 100px;
 }
 
+.grid-3 .column-grid-header {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .column-grid-3{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    
+    color: #154734;
+}
+
+.column-grid-3 button {
+    background-color: white;
+    border: none;
+    color: #154734;
+    transition: all 0.15s;
+}
+
+.column-grid-3 button:hover {
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .cell-2{
