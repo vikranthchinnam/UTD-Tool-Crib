@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/header.css";
 import { useState, useEffect } from "react";
 import "../styles/BorrowTools.css";
+import axios from "axios";
 
 function BorrowTool() {
   const [teamData, setTeamData] = useState([]);
@@ -14,6 +15,8 @@ function BorrowTool() {
   const [currentTableNumber, setTableNumber] = useState(-1);
   const [notes, setNotes] = useState("");
   const [dueDate, setDueDate] = useState("");
+
+  const PORT = 3002;
 
   const filterfunction = (event) => {
     let input, filter, div, txtValue, a, i;
@@ -62,16 +65,19 @@ function BorrowTool() {
   }, []);
 
   async function getTeamData() {
-    fetch("http://localhost:8000/teams")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setTeamData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axios.get(`http://localhost:${PORT}/teams/`).then((resp) => {
+      setTeamData(resp.data);
+    });
+    // fetch("http://localhost:8000/teams")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setTeamData(resp);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }
 
   const submitLogEvent = (event) => {
@@ -85,44 +91,57 @@ function BorrowTool() {
       toolName: currentTool,
       notes: notes,
     };
-    fetch("http://localhost:8000/logs", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(logData),
-    })
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+
+    axios.post(`http://localhost:${PORT}/logs`, logData).then((resp) => {
+      window.location.reload();
+    });
+
+    // fetch("http://localhost:8000/logs", {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(logData),
+    // })
+    //   .then((res) => {
+    //     window.location.reload();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
     const currentTeam = teamData.filter((item) => item.teamNumber == teamNum);
     const currentTeamData = {
       teamNumber: currentTeam[0].teamNumber,
       tableNumber: currentTeam[0].tableNumber,
       teamMembers: currentTeam[0].teamMembers,
       tokens: tempCurrentToolLimit,
+      id: currentTeam[0].id,
     };
-    fetch("http://localhost:8000/teams/" + currentTeam[0].id, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(currentTeamData),
-    }).catch((err) => {
-      console.log(err.message);
+
+    axios.put(`http://localhost:${PORT}/logs`, currentTeamData).then(() => {
+      window.location.reload();
     });
+    // fetch("http://localhost:8000/teams/" + currentTeam[0].id, {
+    //   method: "PUT",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(currentTeamData),
+    // }).catch((err) => {
+    //   console.log(err.message);
+    // });
   };
 
   async function getToolData() {
-    fetch("http://localhost:8000/tools")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setToolData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axios.get(`http://localhost:${PORT}/tools`).then((resp) => {
+      setToolData(resp.data);
+    });
+    // fetch("http://localhost:8000/tools")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setToolData(resp);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }
 
   const refactorData = (num) => {
@@ -147,13 +166,13 @@ function BorrowTool() {
     <div className="borrow-tools">
       <div className="header">
         <div className="title">
-            <h1>Borrow Tool</h1>
+          <h1>Borrow Tool</h1>
         </div>
 
         <div className="header-buttons">
-            <Link to="/">
-              <button>Back</button>
-            </Link>
+          <Link to="/">
+            <button>Back</button>
+          </Link>
         </div>
       </div>
       <div className="input-box">

@@ -1,28 +1,21 @@
 const express = require("express");
 const mysql = require('mysql');
-const PORT = 5000;
-// const cors = require('cors');
-// const dotenv = require('dotenv');
-
-// dotenv.config();
+const PORT = 3002;
+const cors = require('cors');
 
 const app = express();
 
-// app.use(cors());
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
-// const connection = mysql.createConnection({
-//   user: process.env.USER,
-//   host: process.env.HOST,
-//   password: process.env.PASSWORD,
-//   database: process.env.DATABASE,
-// });
+// lets req.body objects be defined idk why
+app.use(express.urlencoded({extended: false}));
 
-// connection.connect((err) => {
-//   if (err) {console.log(err.message);}
-//   console.log('database ' + connection.state);
-// })
+app.use('/tools', require('./routes/toolRoutes'));
+app.use('/teams', require('./routes/teamRoutes'));
+// app.use('/checkout', require('./routes/checkoutRoutes'))
+app.use('/logs', require('./routes/logRoutes'))
 
 app.listen(PORT, () => {
-  console.log("Yay you're port is running");
+  console.log(`Yay you're port is running on ${PORT}`);
 });

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // import {orderData} from "../data/db";
 // import orderData from "../data/db.json";
 import "../styles/logGrid.css";
+import axios from "axios";
 
 function Dashboard() {
   const [data, setData] = useState([]);
@@ -11,6 +12,7 @@ function Dashboard() {
   const [currentMonth, setMonth] = useState("");
   const [currentYear, setYear] = useState("");
 
+  const PORT = 3002;
   useEffect(() => {
     async function fetchData() {
       await getOrderData();
@@ -46,23 +48,26 @@ function Dashboard() {
   }
 
   async function getOrderData() {
-    fetch("http://localhost:8000/logs/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setData(resp);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    axios.get(`http://localhost:${PORT}/logs/`).then((resp) => {
+      setData(resp.data);
+    });
+    // fetch("http://localhost:8000/logs/")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setData(resp);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
   }
 
   return (
     <div className="dashboard">
       <div className="header">
         <div className="title">
-            <h1>Dashboard</h1>
+          <h1>Dashboard</h1>
         </div>
 
         <div className="header-buttons">
@@ -89,7 +94,7 @@ function Dashboard() {
           <div className="header-cell">Notes</div>
           <div className="header-cell">Tool Limit</div>
         </div>
-        
+
         {data &&
           data.map((item) =>
             compareDate(item.dueDate) ? (

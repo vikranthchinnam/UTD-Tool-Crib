@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/header.css";
 import { useState, useEffect } from "react";
 import "../styles/ManageTools.css";
+import axios from "axios";
 
 function ManageTools() {
   const [data, setData] = useState([]);
@@ -10,25 +11,30 @@ function ManageTools() {
 
   const [toolName, setToolName] = useState("");
 
+  const PORT = 3002;
+
   useEffect(() => {
     async function fetchData() {
-      const _data = await getToolData();
+      await getToolData();
     }
 
     fetchData();
   }, []);
 
   async function getToolData() {
-    fetch("http://localhost:8000/tools")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axios.get(`http://localhost:${PORT}/tools`).then((resp) => {
+      setData(resp.data);
+    });
+    // fetch("http://localhost:8000/tools")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setData(resp);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }
 
   const cancelAddUserEvent = (event) => {
@@ -41,16 +47,19 @@ function ManageTools() {
 
   const removeUserEvent = (item) => {
     if (window.confirm("Do you want to remove " + item.tool + "?")) {
-      fetch("http://localhost:8000/tools/" + item.id, {
-        method: "DELETE",
-      })
-        .then((res) => {
-          alert("Removed successfully.");
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      axios.delete(`http://localhost:${PORT}/tools/` + item.id).then(() => {
+        window.location.reload();
+      });
+      // fetch("http://localhost:8000/tools/" + item.id, {
+      //   method: "DELETE",
+      // })
+      //   .then((res) => {
+      //     alert("Removed successfully.");
+      //     window.location.reload();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     }
   };
 
@@ -60,17 +69,20 @@ function ManageTools() {
       alert("Tool Already Exists");
     } else {
       const toolData = { tool: toolName };
-      fetch("http://localhost:8000/tools", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(toolData),
-      })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      axios.post(`http://localhost:${PORT}/tools`, toolData).then(() => {
+        window.location.reload();
+      });
+      // fetch("http://localhost:8000/tools", {
+      //   method: "POST",
+      //   headers: { "content-type": "application/json" },
+      //   body: JSON.stringify(toolData),
+      // })
+      //   .then((res) => {
+      //     window.location.reload();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     }
   };
 
@@ -95,9 +107,9 @@ function ManageTools() {
   return (
     <div className="manage-tools">
       <div className="header">
-          <div className="title">
-            <h1>Admin Panel</h1>
-          </div>
+        <div className="title">
+          <h1>Admin Panel</h1>
+        </div>
         <div className="header-buttons">
           <Link to="/Manage-Teams">
             <button>Manage Teams</button>
@@ -114,7 +126,7 @@ function ManageTools() {
       {addToolHtml()}
       <div className="grid-3">
         <div className="column-grid-3">
-          <div className="cell">Id</div>
+          {/* <div className="cell">Id</div> */}
           <div className="cell">Tool</div>
           <div className="cell">options</div>
         </div>
@@ -122,7 +134,7 @@ function ManageTools() {
         {data &&
           data.map((item) => (
             <div className="column-grid-3">
-              <div className="cell">{item.id}</div>
+              {/* <div className="cell">{item.id}</div> */}
               <div className="cell">{item.tool}</div>
               <div className="cell">
                 <button

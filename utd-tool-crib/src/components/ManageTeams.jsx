@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import "../styles/header.css";
 import "../styles/manageTeams.css";
+import axios from "axios";
+import { read, utils } from "xlsx";
 
 function ManageTeams() {
   const [counter, setCounter] = useState(1);
@@ -12,6 +13,10 @@ function ManageTeams() {
   const [addUser, setAdd] = useState(false);
 
   const [currentEditingId, setID] = useState(0);
+
+  const [fileData, setFileData] = useState(null);
+
+  const PORT = 3002;
 
   //const [editTeamNumber, setTeamnumber] = useState(0);
 
@@ -25,16 +30,19 @@ function ManageTeams() {
         "Do you want to remove team number " + item.teamNumber + "?"
       )
     ) {
-      fetch("http://localhost:8000/teams/" + item.id, {
-        method: "DELETE",
-      })
-        .then((res) => {
-          alert("Removed successfully.");
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      axios.delete(`http://localhost:${PORT}/teams/` + item.id).then(() => {
+        window.location.reload();
+      });
+      // fetch("http://localhost:8000/teams/" + item.id, {
+      //   method: "DELETE",
+      // })
+      //   .then((res) => {
+      //     alert("Removed successfully.");
+      //     window.location.reload();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     }
   };
 
@@ -44,7 +52,7 @@ function ManageTeams() {
 
   useEffect(() => {
     async function fetchData() {
-      const _data = await getTeamData();
+      await getTeamData();
     }
 
     fetchData();
@@ -75,19 +83,23 @@ function ManageTeams() {
         teamMembers: teamMembersValues,
         tokens: tokenNumber,
       };
-      fetch("http://localhost:8000/teams", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(teamdata),
-      })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
 
+      axios.post(`http://localhost:${PORT}/teams/`, teamdata).then(() => {
+        window.location.reload();
+      });
+      //   fetch("http://localhost:8000/teams", {
+      //     method: "POST",
+      //     headers: { "content-type": "application/json" },
+      //     body: JSON.stringify(teamdata),
+      //   })
+      //     .then((res) => {
+      //       window.location.reload();
+      //     })
+      //     .catch((err) => {
+      //       console.log(err.message);
+      //     });
+      // }
+    }
     setAdd(!addUser);
   };
 
@@ -146,19 +158,37 @@ function ManageTeams() {
         tableNumber: editTableNumber,
         teamMembers: editTeamMemDetails,
         tokens: editTokens,
+        id: id,
       };
-      fetch("http://localhost:8000/teams/" + id, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(teamdata),
-      })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+
+      axios.put(`http://localhost:${PORT}/teams/`, teamdata).then(() => {
+        window.location.reload();
+      });
+      //   fetch("http://localhost:8000/teams/" + id, {
+      //     method: "PUT",
+      //     headers: { "content-type": "application/json" },
+      //     body: JSON.stringify(teamdata),
+      //   })
+      //     .then((res) => {
+      //       window.location.reload();
+      //     })
+      //     .catch((err) => {
+      //       console.log(err.message);
+      //     });
+      // }
     }
+  };
+
+  const convertStringToArray = (string) => {
+    let array = string.split(",");
+    for (let i = 0; i < array.length - 1; i++) {
+      array[i] = array[i] + ", ";
+    }
+    return array;
+  };
+
+  const convertString = (string) => {
+    return string.split(",");
   };
 
   const editUserHtml = (id) => {
@@ -184,7 +214,7 @@ function ManageTeams() {
               <div className="editing-team-details-container">
                 {item["teamMembers"] &&
                   item["teamMembers"].length > 0 &&
-                  item["teamMembers"].map((item_) => (
+                  convertString(item["teamMembers"]).map((item_) => (
                     <span>
                       <input
                         type="text"
@@ -230,9 +260,9 @@ function ManageTeams() {
               <div className="single-row">
                 {item["teamMembers"] &&
                   item["teamMembers"].length > 0 &&
-                  item["teamMembers"].map((item_) => (
+                  convertStringToArray(item["teamMembers"]).map((item_) => (
                     <span>
-                      <p>{item_ + ", "}</p>
+                      <p>{item_}</p>
                     </span>
                   ))}
               </div>
@@ -269,9 +299,9 @@ function ManageTeams() {
           <div className="single-row">
             {item["teamMembers"] &&
               item["teamMembers"].length > 0 &&
-              item["teamMembers"].map((item_) => (
+              convertStringToArray(item["teamMembers"]).map((item_) => (
                 <span>
-                  <p>{item_ + ", "}</p>
+                  <p>{item_}</p>
                 </span>
               ))}
           </div>
@@ -298,26 +328,45 @@ function ManageTeams() {
   };
 
   async function getTeamData() {
-    fetch("http://localhost:8000/teams")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axios.get(`http://localhost:${PORT}/teams/`).then((resp) => {
+      setData(resp.data);
+    });
+    // fetch("http://localhost:8000/teams")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setData(resp);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }
 
   const inputFile = (event) => {
-    const file = document.getElementById("file-input");
-    let fileName = [];
-    file.addEventListener("change", (event) => {
-      fileName = file.value.split(".");
-    });
-    if (fileName.length > 0 && fileName[1] == "xlsx") {
-    }
+    // const fileInput = document.getElementById("file-input");
+    // let fileName = [];
+    // console.log(fileInput);
+    // fileInput.addEventListener("change", () => {
+    //   fileName = fileInput.value.split(".");
+    //   if (fileName.length > 0 && fileName[1] == "xlsx") {
+    //     let file = fileInput.files[0];
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //       try {
+    //         const data = new Uint8Array(reader.result);
+    //         const workbook = read(data, { type: "array" });
+    //         const sheetName = workbook.SheetNames[0];
+    //         const sheet = workbook.Sheets[sheetName];
+    //         const json = utils.sheet_to_json(sheet);
+    //         setFileData(json);
+    //         console.log("Hello");
+    //       } catch (error) {
+    //         console.error(error);
+    //       }
+    //     };
+    //   }
+    // });
   };
   return (
     <div>
