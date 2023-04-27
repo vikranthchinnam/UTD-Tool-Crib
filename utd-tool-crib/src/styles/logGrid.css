@@ -13,7 +13,9 @@
 
 .column-grid{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    font-size: large;
+    font-weight: bold;
 }
 
 .cell{
@@ -22,6 +24,7 @@
     text-align: center;
     padding: 10px;
     min-width: fit-content;
+    padding: 15px;
 }
 
 .column-grid-header{
@@ -29,7 +32,8 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  
     background-color: #154734;
     color: white;
-    height: 30px;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .header-cell{
@@ -38,4 +42,8 @@
     border-color: #154734;
     padding: 5px;
     text-align: center;
+}
+
+#late {
+    background-color: rgba(255, 0, 0, 0.15);
 }
