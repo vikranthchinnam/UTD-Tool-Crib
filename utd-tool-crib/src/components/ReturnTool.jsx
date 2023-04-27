@@ -101,7 +101,7 @@ function ReturnTool() {
         </div>
         <div>
           <Link to="/">
-            <button onClick={() => handleRemoveEvent()}>Remove</button>
+            <button id="remove-bttn" onClick={() => handleRemoveEvent()}>Remove</button>
           </Link>
         </div>
       </div></center>

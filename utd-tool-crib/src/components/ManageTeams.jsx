@@ -116,7 +116,7 @@ function ManageTeams() {
           <input type="text" id="tokennumber" defaultValue={5} />
 
           <div className="add-bttn">
-          <button onClick={addUserEvent}>submit</button>
+          <button onClick={addUserEvent}>Submit</button>
           <button onClick={cancelEvent}>Cancel</button>
           </div>
         </div>

@@ -30,3 +30,7 @@
 .tool-list p {
     justify-content: left;
 }
+
+#remove-bttn {
+  border-radius: 25px;
+}

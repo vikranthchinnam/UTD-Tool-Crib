@@ -201,7 +201,7 @@ function BorrowTool() {
               ))}
           </div>
         </div>
-        <label>Tool Name</label>
+        <label id="notes">Tool Name</label>
         <div className="dropdown">
           <button
             onClick={() =>
