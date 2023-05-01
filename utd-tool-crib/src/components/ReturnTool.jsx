@@ -3,6 +3,7 @@ import "../styles/header.css";
 import "../styles/ReturnTool.css";
 import orderData from "../data/db.json";
 import { useState, useEffect } from "react";
+import axios from "axios";
 //import myFunction from "../scripts/returnTools.js"
 
 function ReturnTool() {
@@ -11,6 +12,8 @@ function ReturnTool() {
   const [teamnumber, setNumber] = useState(-1);
 
   const [items, setItem] = useState([]);
+
+  const PORT = 3002;
 
   useEffect(() => {
     async function fetchData() {
@@ -25,11 +28,12 @@ function ReturnTool() {
         document.getElementById(items[i].toolName) &&
         document.getElementById(items[i].toolName).checked
       ) {
-        fetch("http://localhost:8000/logs/" + items[i].id, {
-          method: "DELETE",
-        }).catch((err) => {
-          console.log(err.message);
-        });
+        axios.delete(`http://localhost:${PORT}/logs/` + items[i].id);
+        // fetch("http://localhost:8000/logs/" + items[i].id, {
+        //   method: "DELETE",
+        // }).catch((err) => {
+        //   console.log(err.message);
+        // });
       }
     }
   };
@@ -60,51 +64,58 @@ function ReturnTool() {
   // }
 
   async function getOrderData() {
-    fetch("http://localhost:8000/logs/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        setData(resp);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    axios.get(`http://localhost:${PORT}/logs/`).then((resp) => {
+      setData(resp.data);
+    });
+    // fetch(`http://localhost:${PORT}/logs/`)
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resp) => {
+    //     setData(resp);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
   }
   return (
     <div className="return-tool">
       <div className="header">
         <div className="title">
-            <h1>Return Tool</h1>
+          <h1>Return Tool</h1>
         </div>
 
         <div className="header-buttons">
-            <Link to="/">
-              <button>Back</button>
-            </Link>
+          <Link to="/">
+            <button>Back</button>
+          </Link>
         </div>
       </div>
 
-      <center><div className="input-box">
-        <div>
-          <p>Team Number</p>
-          <input type="text" id="teamnumber" onChange={handleEnterData} />
+      <center>
+        <div className="input-box">
+          <div>
+            <p>Team Number</p>
+            <input type="text" id="teamnumber" onChange={handleEnterData} />
+          </div>
+          <div>
+            {items &&
+              items.map((item) => (
+                <div className="tool-list">
+                  <input type="checkbox" id={item.toolName} />
+                  <p>{item.toolName}</p>
+                </div>
+              ))}
+          </div>
+          <div>
+            <Link to="/">
+              <button id="remove-bttn" onClick={() => handleRemoveEvent()}>
+                Remove
+              </button>
+            </Link>
+          </div>
         </div>
-        <div>
-          {items &&
-            items.map((item) => (
-              <div className="tool-list">
-                <input type="checkbox" id={item.toolName} />
-                <p>{item.toolName}</p>
-              </div>
-            ))}
-        </div>
-        <div>
-          <Link to="/">
-            <button id="remove-bttn" onClick={() => handleRemoveEvent()}>Remove</button>
-          </Link>
-        </div>
-      </div></center>
+      </center>
     </div>
   );
 }

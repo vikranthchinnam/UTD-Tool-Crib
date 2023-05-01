@@ -92,7 +92,7 @@ function BorrowTool() {
       notes: notes,
     };
 
-    axios.post(`http://localhost:${PORT}/logs`, logData).then((resp) => {
+    axios.post(`http://localhost:${PORT}/logs/`, logData).then((resp) => {
       window.location.reload();
     });
 
@@ -107,16 +107,17 @@ function BorrowTool() {
     //   .catch((err) => {
     //     console.log(err.message);
     //   });
+
     const currentTeam = teamData.filter((item) => item.teamNumber == teamNum);
     const currentTeamData = {
       teamNumber: currentTeam[0].teamNumber,
       tableNumber: currentTeam[0].tableNumber,
-      teamMembers: currentTeam[0].teamMembers,
+      teamMembers: convertString(currentTeam[0].teamMembers),
       tokens: tempCurrentToolLimit,
       id: currentTeam[0].id,
     };
 
-    axios.put(`http://localhost:${PORT}/logs`, currentTeamData).then(() => {
+    axios.put(`http://localhost:${PORT}/teams/`, currentTeamData).then(() => {
       window.location.reload();
     });
     // fetch("http://localhost:8000/teams/" + currentTeam[0].id, {
@@ -143,15 +144,16 @@ function BorrowTool() {
     //     console.log(err.message);
     //   });
   }
-
+  const convertString = (string) => {
+    return string.split(",");
+  };
   const refactorData = (num) => {
     if (num > 0) {
       setTeamNum(num);
       const currentTeam = teamData.filter((item) => item.teamNumber == num);
       if (currentTeam.length > 0) {
-        setTeamMembers(currentTeam[0].teamMembers);
+        setTeamMembers(convertString(currentTeam[0].teamMembers));
         setTableNumber(currentTeam[0].tableNumber);
-        setTeamMembers(currentTeam[0].teamMembers);
         setToolLimit(currentTeam[0].tokens);
         setTeamMember("select team member");
       } else {
@@ -175,92 +177,95 @@ function BorrowTool() {
           </Link>
         </div>
       </div>
-      <center><div className="input-box">
-        <label>Team Number</label>
-        <input
-          type="text"
-          placeholder="Type here"
-          onChange={(event) => refactorData(event.target.value)}
-        />
-        <label>Tool Limit</label>
-        <input type="text" value={currentToolLimit} />
-        <label>Team Member</label>
-        <div className="dropdown">
-          <button
-            onClick={() =>
-              document
-                .getElementById("team-member-dropdown")
-                .classList.toggle("show")
-            }
-            className="drop-btn"
-          >
-            {teamMember}
-          </button>
-          <div id="team-member-dropdown" className="dropdown-content">
-            {/* <input
+      <center>
+        <div className="input-box">
+          <label>Team Number</label>
+          <input
+            type="text"
+            placeholder="Type here"
+            onChange={(event) => refactorData(event.target.value)}
+          />
+          <label>Tool Limit</label>
+          <input type="text" value={currentToolLimit} />
+          <label>Team Member</label>
+          <div className="dropdown">
+            <button
+              onClick={() =>
+                document
+                  .getElementById("team-member-dropdown")
+                  .classList.toggle("show")
+              }
+              className="drop-btn"
+            >
+              {teamMember}
+            </button>
+            <div id="team-member-dropdown" className="dropdown-content">
+              {/* <input
               type="text"
               placeholder="Search..."
               onKeyUp={filterfunction()}
             /> */}
-            {teamMembers &&
-              teamMembers.map((entry) => (
-                <div>
-                  <button
-                    key={entry}
-                    onClick={() => {
-                      setTeamMember(entry);
-                      document
-                        .getElementById("team-member-dropdown")
-                        .classList.toggle("show");
-                    }}
-                  >
-                    {entry}
-                  </button>
-                </div>
-              ))}
+              {teamMembers &&
+                teamMembers.map((entry) => (
+                  <div>
+                    <button
+                      key={entry}
+                      onClick={() => {
+                        setTeamMember(entry);
+                        document
+                          .getElementById("team-member-dropdown")
+                          .classList.toggle("show");
+                      }}
+                    >
+                      {entry}
+                    </button>
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-        <label id="notes">Tool Name</label>
-        <div className="dropdown">
-          <button
-            onClick={() =>
-              document.getElementById("tool-dropdown").classList.toggle("show")
-            }
-            className="drop-btn"
-          >
-            {currentTool}
-          </button>
-          <div id="tool-dropdown" className="dropdown-content">
-            <input
-              type="text"
-              placeholder="Search..."
-              onKeyUp={() => filterfunction(true)}
-              id="myInput"
-            />
-            {toolData &&
-              toolData.map((entry) => (
-                <div>
-                  <button
-                    key={entry.id}
-                    onClick={() => {
-                      setTool(entry.tool);
-                      document
-                        .getElementById("tool-dropdown")
-                        .classList.toggle("show");
-                    }}
-                  >
-                    {entry.tool}
-                  </button>
-                </div>
-              ))}
+          <label id="notes">Tool Name</label>
+          <div className="dropdown">
+            <button
+              onClick={() =>
+                document
+                  .getElementById("tool-dropdown")
+                  .classList.toggle("show")
+              }
+              className="drop-btn"
+            >
+              {currentTool}
+            </button>
+            <div id="tool-dropdown" className="dropdown-content">
+              <input
+                type="text"
+                placeholder="Search..."
+                onKeyUp={() => filterfunction(true)}
+                id="myInput"
+              />
+              {toolData &&
+                toolData.map((entry) => (
+                  <div>
+                    <button
+                      key={entry.id}
+                      onClick={() => {
+                        setTool(entry.tool);
+                        document
+                          .getElementById("tool-dropdown")
+                          .classList.toggle("show");
+                      }}
+                    >
+                      {entry.tool}
+                    </button>
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-        <label id="notes">Notes</label>
-        <input
-          type="text"
-          placeholder="Type here"
-          onChange={(event) => setNotes(event.target.value)}
-        />
+          <label id="notes">Notes</label>
+          <input
+            type="text"
+            placeholder="Type here"
+            onChange={(event) => setNotes(event.target.value)}
+          />
           <label>Due Date</label>
           <input
             type="text"
@@ -279,7 +284,8 @@ function BorrowTool() {
               Submit
             </button>
           </Link>
-      </div></center>
+        </div>
+      </center>
     </div>
   );
 }

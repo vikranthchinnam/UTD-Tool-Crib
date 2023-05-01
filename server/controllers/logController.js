@@ -19,12 +19,13 @@ const getLogs = asyncHandler(async (req, res) => {
 
 const setLogs = asyncHandler(async (req, res) => {
     const postNumber = req.body.teamNumber;
+    const postTableNumber = req.body.tableNumber;
     const postMember = req.body.teamMember;
     const postDate = req.body.dueDate;
     const postLimit = req.body.toolLimit;
     const postName = req.body.toolName;
     const postNotes = req.body.notes;
-    queryLogs.query("INSERT INTO managelogs (teamNumber, teamMember, dueDate, toolLimit, toolName, notes) VALUES (?, ?, ?, ?, ?, ?)", [postNumber, postMember, postDate, postLimit, postName, postNotes], (err, result) => {
+    queryLogs.query("INSERT INTO managelogs (teamNumber,tableNumber, teamMember, dueDate, toolLimit, toolName, notes) VALUES (?, ?, ?, ?, ?, ?, ?)", [postNumber,postTableNumber, postMember, postDate, postLimit, postName, postNotes], (err, result) => {
         if(err){
             console.log(err);
         }
