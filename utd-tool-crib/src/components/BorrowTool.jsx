@@ -157,7 +157,6 @@ function BorrowTool() {
         setToolLimit(currentTeam[0].tokens);
         setTeamMember("select team member");
       } else {
-        alert("invalid team number");
         setTeamMember("select team member");
         setTeamMembers([]);
       }
