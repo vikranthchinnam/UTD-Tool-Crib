@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import logo from "../styles/logo.svg";
 import { useState, useEffect } from "react";
 import "../styles/ManageTools.css";
 import axios from "axios";
 
 function ManageTools() {
+  console.log(logo);
+
   const [data, setData] = useState([]);
 
   const [addTool, setAdd] = useState(false);
@@ -114,7 +117,8 @@ function ManageTools() {
     <div className="manage-tools">
       <div className="header">
         <div className="title">
-          <h1>Admin Panel</h1>
+        <img src={logo} alt="" />
+        <h1>Admin Panel</h1>
         </div>
         <div className="header-buttons">
           <Link to="/Manage-Teams">

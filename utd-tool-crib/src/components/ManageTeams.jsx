@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import logo from "../styles/logo.svg";
 import "../styles/manageTeams.css";
 import axios from "axios";
 import { read } from "xlsx";
 
 function ManageTeams() {
+  console.log(logo);
+
   const [counter, setCounter] = useState(1);
 
   const [data, setData] = useState([]);
@@ -420,7 +423,10 @@ function ManageTeams() {
   return (
     <div>
       <div className="header">
-        <h1 className="title">Admin Panel</h1>
+        <div className="title">
+        <img src={logo} alt="" />
+        <h1>Admin Panel</h1>
+        </div>
 
         <div className="header-buttons">
           <Link to="/Manage-Teams">

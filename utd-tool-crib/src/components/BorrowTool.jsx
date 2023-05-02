@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import logo from "../styles/logo.svg";
 import { useState, useEffect } from "react";
 import "../styles/BorrowTools.css";
 import axios from "axios";
 
 function BorrowTool() {
+  console.log(logo);
+
   const [teamData, setTeamData] = useState([]);
   const [toolData, setToolData] = useState([]);
   const [teamNum, setTeamNum] = useState("");
@@ -167,6 +170,7 @@ function BorrowTool() {
     <div className="borrow-tools">
       <div className="header">
         <div className="title">
+        <img src={logo} alt="" />
           <h1>Borrow Tool</h1>
         </div>
 

@@ -1,4 +1,5 @@
 import "../styles/header.css";
+import logo from "../styles/logo.svg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import {orderData} from "../data/db";
@@ -8,6 +9,8 @@ import axios from "axios";
 import { writeFile, utils } from "xlsx";
 
 function Dashboard() {
+  console.log(logo);
+
   const [data, setData] = useState([]);
   const [currentDate, setDate] = useState("");
   const [currentMonth, setMonth] = useState("");
@@ -77,6 +80,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="header">
         <div className="title">
+          <img src={logo} alt="" />
           <h1>Dashboard</h1>
         </div>
 

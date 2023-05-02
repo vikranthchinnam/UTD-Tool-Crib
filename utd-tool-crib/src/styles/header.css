@@ -6,7 +6,20 @@ body{
 
 .header h1 {
     color: #e87500;
-    padding-left: 100px;
+    padding-left: 0;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+    margin-left: 100px;
+    margin-right: 0;
+    margin-top: 2px;
 }
 
 .header-buttons {

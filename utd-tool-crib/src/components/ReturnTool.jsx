@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import "../styles/header.css";
 import "../styles/ReturnTool.css";
+import logo from "../styles/logo.svg";
 import orderData from "../data/db.json";
 import { useState, useEffect } from "react";
 import axios from "axios";
 //import myFunction from "../scripts/returnTools.js"
 
 function ReturnTool() {
+  console.log(logo);
+
   const [data, setData] = useState([]);
 
   const [teamnumber, setNumber] = useState(-1);
@@ -82,6 +85,7 @@ function ReturnTool() {
     <div className="return-tool">
       <div className="header">
         <div className="title">
+        <img src={logo} alt="" />
           <h1>Return Tool</h1>
         </div>
 
