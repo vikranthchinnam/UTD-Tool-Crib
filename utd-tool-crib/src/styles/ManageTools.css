@@ -5,11 +5,14 @@
 .grid-3{
     display: grid;
     grid-template-columns: 1fr;
-    margin: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .grid-3 .column-grid-header {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .column-grid-3{
@@ -46,7 +49,7 @@
 .add {
     background-color: white;
     border: none;
-    font-size: large;
+    font-size: larger;
     font-weight: bold;
     color: #154734;
     transition: all 0.15s;
@@ -61,11 +64,6 @@
 .add-input-box h2 {
     color: #e87500;
     font-weight: bold;
-}
-
-.add-input-box hr {
-    border: 1px solid #e87500;
-    margin-bottom: 25px;
 }
 
 .add-input-box p {
