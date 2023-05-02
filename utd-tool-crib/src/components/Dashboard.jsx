@@ -94,7 +94,7 @@ function Dashboard() {
         </div>
       </div>
       <div>
-        <button onClick={exportLogs}>Export Log History</button>
+        <button className="export" onClick={exportLogs}>Export Log History</button>
       </div>
       <div className="grid">
         <div className="column-grid-header">

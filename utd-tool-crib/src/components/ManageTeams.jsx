@@ -108,29 +108,31 @@ function ManageTeams() {
   const addUserHtml = () => {
     if (addUser) {
       return (
-        <div>
-          <p>Team Number:</p>
+        <div className="add-input-box">
+          <h2>Add User</h2>
+          <hr />
+          <p>Team Number</p>
           <input type="text" name="" id="teamnumber" />
-          <p>Table Number:</p>
+          <p>Table Number</p>
           <input type="text" name="" id="tablenumber" />
-          <p>Team Members:</p>
+          <p>Team Members</p>
           {Array.apply(null, Array(counter)).map((c, i) => (
             <div className="team-member-container">
               <input type="text" />
             </div>
           ))}
-          <button onClick={addInputEvent}>new member</button>
-          <p>Token:</p>
+          <button id="new-member" onClick={addInputEvent}>+</button>
+          <p>Token</p>
           <input type="text" id="tokennumber" defaultValue={5} />
 
-          <button onClick={addUserEvent}>submit</button>
+          <button onClick={addUserEvent}>Submit</button>
           <button onClick={cancelEvent}>Cancel</button>
         </div>
       );
     } else {
       return (
         <div>
-          <button onClick={addUserEvent}>Add User</button>
+          <button className="add" onClick={addUserEvent}>Add User</button>
         </div>
       );
     }
@@ -418,9 +420,13 @@ function ManageTeams() {
   return (
     <div>
       <div className="header">
-        <p className="title">Manage Teams</p>
+        <h1 className="title">Admin Panel</h1>
 
         <div className="header-buttons">
+          <Link to="/Manage-Teams">
+            <button id="manage-teams-button">Manage Teams</button>
+          </Link>
+
           <Link to="/Manage-Tools">
             <button>Manage Tools</button>
           </Link>
@@ -432,9 +438,9 @@ function ManageTeams() {
         </div>
       </div>
 
-      <div>{addUserHtml()}</div>
+      <div className="manage-teams-bttns">{addUserHtml()}</div>
       <div>
-        <input type="file" id="file-input" onClick={() => inputFile()} />
+        <input className="manage-teams-bttns" type="file" id="file-input" onClick={() => inputFile()} />
       </div>
       <div className="grid-2">
         <div id="table-header" className="column-grid-2">

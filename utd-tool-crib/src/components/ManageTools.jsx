@@ -91,6 +91,7 @@ function ManageTools() {
       return (
         <div className="add-input-box">
           <h2>Add Tool</h2>
+          <hr />
           <p>Tool Name</p>
           <input type="text" onChange={(e) => setToolName(e.target.value)} />
           <div className="add-bttn">

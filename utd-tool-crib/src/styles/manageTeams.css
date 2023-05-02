@@ -2,6 +2,13 @@
     color: black;
 }
 
+hr {
+    border: 2px solid #e87500;
+    width: 26%;
+    border-radius: 10px;
+    margin-left: 0;
+}
+
 .manage-teams-bttns{
     margin-top: 50px;
     margin-left: 100px;
