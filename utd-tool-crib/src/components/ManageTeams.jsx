@@ -437,7 +437,7 @@ function ManageTeams() {
         <input type="file" id="file-input" onClick={() => inputFile()} />
       </div>
       <div className="grid-2">
-        <div className="column-grid-2">
+        <div id="table-header" className="column-grid-2">
           <div className="cell">Team Number</div>
           <div className="cell">Table Number</div>
           <div className="cell">Team Members</div>
