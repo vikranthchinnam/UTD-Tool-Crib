@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const queryLogs = require("../db-service");
-let XLSX = require("xlsx");
+
 /*
 @desc Fetches the logs table from the database
 @route GET /logs
@@ -12,10 +12,77 @@ const getLogs = asyncHandler(async (req, res) => {
             console.log(err);
         }
         else {
-            res.send(result);
+            let data = [];
+            for(let i = 0; i < result.length; i++){
+                data.push([result[i].id, result[i].teamNumber, result[i].tableNumber, result[i].teamMember, result[i].dueDate, result[i].toolLimit, result[i].toolName, result[i].notes]);
+            }
+
+            data = sortData(data);
+
+            const response = data.reduce((acc, [id, teamNumber, tableNumber, teamMember, dueDate,toolLimit, toolName, notes]) => {
+                acc.push({id, teamNumber, tableNumber, teamMember, dueDate, toolLimit, toolName, notes});
+                return acc;
+              }, []);
+            // let response = {};
+            // for(let i = 0; i < data.length; i++){
+            //     const respData = {
+            //         id: data[i][0],
+            //         teamNumber: data[i][1],
+            //         tableNumber: data[i][2],
+            //         teamMember: data[i][3],
+            //         dueDate: data[i][4],
+            //         toolLimit: data[i][5],
+            //         toolName: data[i][6],
+            //         notes: data[i][7],
+            //     }
+            //     response.push(respData);
+            // }
+            res.send(response);
         }
     })
 });
+
+function sortData(data){
+    let temp = data;
+    
+    for(let i = 0; i < temp.length; i++){
+        for(let j = 0; j < temp.length - 1; j++){
+            
+            if(!compareDate(temp[j][4], temp[j+1][4])){
+                let rando = temp[j];
+                temp[j] = temp[j+1];
+                temp[j+1] = rando;
+            }
+        }
+    }
+    return temp;
+}
+
+/* 
+@desc compareDate compares two dates firstDate and secondDate if first Date is smaller than second date it returns true else false.
+*/
+function compareDate(firstDate, secondDate) {
+    const compareDay = firstDate.substring(3, 5);
+    const compareMonth = firstDate.substring(0, 2);
+    const compareYear = firstDate.substring(6, 10);
+    const currentDate = secondDate.substring(3, 5);
+    const currentMonth = secondDate.substring(0, 2);
+    const currentYear = secondDate.substring(6, 10);
+    
+    if (compareYear >= currentYear) {
+      if (compareMonth >= currentMonth) {
+        if (compareDay >= currentDate) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
 
 const setLogs = asyncHandler(async (req, res) => {
     const postNumber = req.body.teamNumber;

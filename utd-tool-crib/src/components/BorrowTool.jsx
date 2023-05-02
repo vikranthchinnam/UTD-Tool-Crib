@@ -85,7 +85,7 @@ function BorrowTool() {
     const logData = {
       teamNumber: teamNum,
       tableNumber: currentTableNumber,
-      teamMember: teamMember,
+      teamMember: teamMember.trim(),
       dueDate: dueDate,
       toolLimit: tempCurrentToolLimit,
       toolName: currentTool,
