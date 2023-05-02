@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/header.css";
 import "../styles/manageTeams.css";
 import axios from "axios";
-import { read, utils } from "xlsx";
+import { read } from "xlsx";
 
 function ManageTeams() {
   const [counter, setCounter] = useState(1);
@@ -13,8 +13,6 @@ function ManageTeams() {
   const [addUser, setAdd] = useState(false);
 
   const [currentEditingId, setID] = useState(0);
-
-  const [fileData, setFileData] = useState(null);
 
   const PORT = 3002;
 
@@ -343,28 +341,77 @@ function ManageTeams() {
     //   });
   }
 
-  const inputFile = (event) => {
-    // const fileInput = document.getElementById("file-input");
+  async function handleFileAsync(e) {
+    const file = e.target.files[0];
+    const data = await file.arrayBuffer();
+    /* data is an ArrayBuffer */
+    const workbook = read(data);
+    let sheet = workbook.Sheets.Sheet1;
+    const arr = Object.values(sheet);
+    for (let i = 9; i < arr.length - 1; i += 8) {
+      const teamData = {
+        teamNumber: arr[i].v,
+        tableNumber: arr[i + 1].v,
+        teamMembers: [
+          arr[i + 2].v,
+          arr[i + 3].v,
+          arr[i + 4].v,
+          arr[i + 5].v,
+          arr[i + 6].v,
+          arr[i + 7].v,
+        ],
+        tokens: 5,
+      };
+      axios.post(`http://localhost:${PORT}/teams/`, teamData).then(() => {
+        window.location.reload();
+      });
+    }
+    // console.log(arr);
+    // sheet.forEach(myFunction);
+
+    /* DO SOMETHING WITH workbook HERE */
+  }
+
+  const inputFile = (e) => {
+    const fileInput = document.getElementById("file-input");
     // let fileName = [];
-    // console.log(fileInput);
+    console.log(fileInput);
+    fileInput.addEventListener("change", handleFileAsync, false);
+
     // fileInput.addEventListener("change", () => {
+    //   // console.log(fileInput.files[0]);
+    //   // console.log(fileInput.result);
     //   fileName = fileInput.value.split(".");
     //   if (fileName.length > 0 && fileName[1] == "xlsx") {
-    //     let file = fileInput.files[0];
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       try {
-    //         const data = new Uint8Array(reader.result);
-    //         const workbook = read(data, { type: "array" });
-    //         const sheetName = workbook.SheetNames[0];
-    //         const sheet = workbook.Sheets[sheetName];
-    //         const json = utils.sheet_to_json(sheet);
-    //         setFileData(json);
-    //         console.log("Hello");
-    //       } catch (error) {
-    //         console.error(error);
-    //       }
-    //     };
+    //     // let file = fileInput.files[0];
+    //     // let reader = new FileReader();
+    //     // reader.onload = function (e) {
+    //     //   var data = fileInput.result;
+    //     //   /* reader.readAsArrayBuffer(file) -> data will be an ArrayBuffer */
+    //     //   var workbook = XLSX.read(fileInput.result);
+    //     //   console.log(workbook);
+    //     //   /* DO SOMETHING WITH workbook HERE */
+    //     // };
+    //     // reader.readAsArrayBuffer(file);
+    //     // axios.post(`http://localhost:${PORT}/teams/import`, {
+    //     //   file: fileInput.files[0],
+    //     //   result: fileInput.result,
+    //     // });
+    //     //     let file = fileInput.files[0];
+    //     //     const reader = new FileReader();
+    //     //     reader.onload = () => {
+    //     //       try {
+    //     //         const data = new Uint8Array(reader.result);
+    //     //         const workbook = read(data, { type: "array" });
+    //     //         const sheetName = workbook.SheetNames[0];
+    //     //         const sheet = workbook.Sheets[sheetName];
+    //     //         const json = utils.sheet_to_json(sheet);
+    //     //         setFileData(json);
+    //     //         console.log("Hello");
+    //     //       } catch (error) {
+    //     //         console.error(error);
+    //     //       }
+    //     //     };
     //   }
     // });
   };

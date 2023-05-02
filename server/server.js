@@ -14,7 +14,8 @@ app.use(express.urlencoded({extended: false}));
 app.use('/tools', require('./routes/toolRoutes'));
 app.use('/teams', require('./routes/teamRoutes'));
 // app.use('/checkout', require('./routes/checkoutRoutes'))
-app.use('/logs', require('./routes/logRoutes'))
+app.use('/logs', require('./routes/logRoutes'));
+// app.use('/teams', require('./routes/importRoutes'));
 
 app.listen(PORT, () => {
   console.log(`Yay you're port is running on ${PORT}`);

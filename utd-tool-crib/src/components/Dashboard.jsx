@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // import orderData from "../data/db.json";
 import "../styles/logGrid.css";
 import axios from "axios";
+import { writeFile, utils } from "xlsx";
 
 function Dashboard() {
   const [data, setData] = useState([]);
@@ -63,6 +64,15 @@ function Dashboard() {
     //   });
   }
 
+  const exportLogs = (event) => {
+    axios.post(`http://localhost:${PORT}/logs/export/`).then((resp) => {
+      const data = resp.data;
+      const workbook = utils.book_new();
+      const worksheet = utils.aoa_to_sheet(data);
+      utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      writeFile(workbook, "output.xlsx");
+    });
+  };
   return (
     <div className="dashboard">
       <div className="header">
@@ -83,7 +93,9 @@ function Dashboard() {
           <button>Log Out</button>
         </div>
       </div>
-
+      <div>
+        <button onClick={exportLogs}>Export Log History</button>
+      </div>
       <div className="grid">
         <div className="column-grid-header">
           <div className="header-cell">Team Number</div>

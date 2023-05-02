@@ -85,7 +85,7 @@ function BorrowTool() {
     const logData = {
       teamNumber: teamNum,
       tableNumber: currentTableNumber,
-      teamMember: teamMember,
+      teamMember: teamMember.trim(),
       dueDate: dueDate,
       toolLimit: tempCurrentToolLimit,
       toolName: currentTool,
@@ -157,7 +157,6 @@ function BorrowTool() {
         setToolLimit(currentTeam[0].tokens);
         setTeamMember("select team member");
       } else {
-        alert("invalid team number");
         setTeamMember("select team member");
         setTeamMembers([]);
       }
