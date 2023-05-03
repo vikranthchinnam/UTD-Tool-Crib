@@ -56,11 +56,11 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    width: 414px;
+    width: 352px;
     z-index: 1;
     background-color: #154734;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    margin-left: 7px;
+    margin-left: 10px;
   }
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button)*/

@@ -14,8 +14,6 @@
 .column-grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-    font-size: large;
-    font-weight: bold;
 }
 
 .cell{
@@ -32,8 +30,6 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  
     background-color: #154734;
     color: white;
-    font-size: larger;
-    font-weight: bold;
 }
 
 .header-cell{
