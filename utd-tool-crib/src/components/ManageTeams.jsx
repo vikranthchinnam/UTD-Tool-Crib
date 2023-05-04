@@ -124,7 +124,9 @@ function ManageTeams() {
               <input type="text" />
             </div>
           ))}
-          <button id="new-member" onClick={addInputEvent}>+</button>
+          <button id="new-member" onClick={addInputEvent}>
+            +
+          </button>
           <p>Token</p>
           <input type="text" id="tokennumber" defaultValue={5} />
 
@@ -135,7 +137,9 @@ function ManageTeams() {
     } else {
       return (
         <div>
-          <button className="add" onClick={addUserEvent}>Add User</button>
+          <button className="add" onClick={addUserEvent}>
+            Add User
+          </button>
         </div>
       );
     }
@@ -197,7 +201,7 @@ function ManageTeams() {
   const editUserHtml = (id) => {
     if (id > 0) {
       return data.map((item) => (
-        <div className="grid-2">
+        <div className="">
           {item.id == id ? (
             <div className="column-grid-2">
               <div className="cell-2">
@@ -205,6 +209,7 @@ function ManageTeams() {
                   type="text"
                   defaultValue={item["teamNumber"]}
                   id={item.id + "number"}
+                  className="edit"
                 />
               </div>
               <div className="cell-2">
@@ -212,9 +217,10 @@ function ManageTeams() {
                   type="text"
                   defaultValue={item["tableNumber"]}
                   id={item.id + "tnumber"}
+                  className="edit"
                 />
               </div>
-              <div className="editing-team-details-container">
+              <div className="cell-2">
                 {item["teamMembers"] &&
                   item["teamMembers"].length > 0 &&
                   convertString(item["teamMembers"]).map((item_) => (
@@ -232,6 +238,7 @@ function ManageTeams() {
                   type="text"
                   defaultValue={item["tokens"]}
                   id={id + "token"}
+                  className="edit"
                 />
               </div>
               <div className="cell-2">
@@ -424,8 +431,8 @@ function ManageTeams() {
     <div>
       <div className="header">
         <div className="title">
-        <img src={logo} alt="" />
-        <h1>Admin Panel</h1>
+          <img src={logo} alt="" />
+          <h1>Admin Panel</h1>
         </div>
 
         <div className="header-buttons">
@@ -446,7 +453,12 @@ function ManageTeams() {
 
       <div className="manage-teams-bttns">{addUserHtml()}</div>
       <div>
-        <input className="manage-teams-bttns" type="file" id="file-input" onClick={() => inputFile()} />
+        <input
+          className="manage-teams-bttns"
+          type="file"
+          id="file-input"
+          onClick={() => inputFile()}
+        />
       </div>
       <div className="grid-2">
         <div id="table-header" className="column-grid-2">

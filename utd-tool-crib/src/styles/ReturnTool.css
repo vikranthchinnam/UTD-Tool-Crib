@@ -27,6 +27,10 @@
     display: flex;
 }
 
+.tool-list input {
+    width: 20%;
+}
+
 .tool-list p {
     justify-content: left;
 }

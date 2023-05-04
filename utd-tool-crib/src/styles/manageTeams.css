@@ -27,6 +27,7 @@ hr {
     margin-right: 100px;
     margin-top: 50px;
     margin-bottom: 50px;
+    row-gap: 0;
 }
 
 #table-header {
@@ -36,7 +37,8 @@ hr {
 
 .column-grid-2{
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+    grid-template-columns: 0.8fr 0.8fr 4fr 0.8fr 0.5fr;
+    row-gap: 0;
 }
 
 .cell {
@@ -134,4 +136,12 @@ input[type="file"]:hover {
 input[type="file"]::file-selector-button:hover {
     background-color: #0e2f23;
     cursor: pointer;
+} 
+
+/* .editing-team-members-container{
+    contain: ;
+} */
+
+.edit {
+    max-width: 110px;
 }
