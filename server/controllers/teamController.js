@@ -86,7 +86,7 @@ const deleteTeams = asyncHandler(async (req, res) => {
   })
 });
 const deleteAllTeams = asyncHandler(async (req, res) => {
-  console.log("I'm here");
+  
   queryTeam.query("DELETE FROM manageteams", (err) => {
     if (err) {
       console.log(err)
