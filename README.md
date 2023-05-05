@@ -51,11 +51,44 @@ open your local connection and then create a new schema called toolcrib by right
 
 That will be how it will look at the end for now you will have nothing under Tables. 
 
-right click on Tables and create new table called 'managelogs' and edit it until it looks like the below schema.
+right click on Tables and create new table called 'managetools' and edit it until it looks like the below schema.
 
-<img width="638" alt="image" src="https://user-images.githubusercontent.com/58540957/236379023-3d74b1d6-a7ab-4638-a39e-a2706e4bd975.png">
+<img width="1144" alt="image" src="https://user-images.githubusercontent.com/58540957/236379283-9d06bb88-b6cc-46c6-beae-0b83b169bafd.png">
 
 click apply, and you have set up the first table repeat for the next three.
 
+right click on Tables and create new table called 'manageteams' and edit it until it looks like the below schema.
+
+<img width="1144" alt="image" src="https://user-images.githubusercontent.com/58540957/236379203-ceb4e82c-f3d4-48d7-a29e-e543eb8b208a.png">
+
+click apply.
+
 right click on Tables and create new table called 'managelogs' and edit it until it looks like the below schema.
 
+<img width="1144" alt="image" src="https://user-images.githubusercontent.com/58540957/236379173-e0584f09-bebe-42d2-b686-0f69cd4330f8.png">
+
+click apply.
+
+right click on Tables and create new table called 'loghistory' and edit it until it looks like the below schema.
+
+<img width="1144" alt="image" src="https://user-images.githubusercontent.com/58540957/236379434-94865a4d-e8d7-47ba-a544-782ae410529c.png">
+
+click apply.
+
+you have now set up everything for the app.
+
+How to run the app.
+
+first open up XAMPP and start the SQL Database Server, on mac it looks like the below.
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/58540957/236379541-1111d18d-b85a-4d97-ad93-2c6d0b297d23.png">
+
+next go to the terminal open up the main repo with the folders server and utd-tool-crib.
+
+cd into server and then do node server.js.
+
+open a new terminal and then cd into utd-tool-crib and run npm start.
+
+This should make the app work, If you have any errors along the way Google will be your best friend ;)
+
+best of luck for this project guys :)
